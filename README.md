@@ -2,11 +2,11 @@
 
 Học kỳ 1, Năm học 2024-2025
 
-**Tên dự án**:
+**Tên dự án**: Web bán đồ ăn nhanh
 
-**MSSV 1**:
+**MSSV 1**: B2111846
 
-**Họ tên SV 1**:
+**Họ tên SV 1**: Hà Vũ Khang
 
 **MSSV 2**:
 
