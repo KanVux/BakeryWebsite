@@ -2,7 +2,7 @@
 
 Học kỳ 1, Năm học 2024-2025
 
-**Tên dự án**: Web bán bánh ngọt
+**Tên dự án**: Website bán bánh ngọt
 
 **MSSV 1**: B2111846
 
