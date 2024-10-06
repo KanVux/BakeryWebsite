@@ -19,60 +19,99 @@
     font-weight: 600;
     font-style: normal;
 }
-
-*{
+h1,h2,h3,h4, nav a {
     font-family: "Lobster", sans-serif;
 }
-/* Hero Carousel */
+/* Global CSS */
+*{
+    margin: 0px;
+    font-family: "Barlow Condensed", sans-serif;
+}
+#container{
+    background-color: aliceblue;
+}
 
+/* Hero Carousel Section*/
 .carousel-item {
     transition: transform 1s ease-in-out !important;
 }
-.carousel-item .col{
-    height: 550px;
+
+.carousel-item .col {
+    height: 35rem;
 }
-#HeadCarousel{
-    background-color:  rgb(255, 245, 205);
+
+#HeadCarousel {
+    background-color: rgb(255, 245, 205);
 }
-#CarouselTitle, #CarouselPagaraph{   
+
+#CarouselTitle,
+#CarouselPagaraph {
     color: rgb(106, 154, 176);
 }
-#CarouselPagaraph{
-    font-size: 22px;
+
+#CarouselPagaraph {
+    font-size: clamp(20px, 1.2vw, 100px);
 }
-#CarouselTitle{
+
+#CarouselTitle {
     text-decoration: overline underline;
 }
 
 /* Carousel images */
-#carousel-img1{
-    max-width: 100%;
-    max-height: 100%;
-    background-image: url(../images/carousel-img1.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-#carousel-img2 {
-    max-width: 100%;
-    max-height: 100%;
-    background-image: url(../images/carousel-img2.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
+#carousel-img1,
+#carousel-img2,
 #carousel-img3 {
     max-width: 100%;
     max-height: 100%;
-    background-image: url(../images/carousel-img3.jpg);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
+    object-fit: contain;
 }
-#Logo{
-    width: 175px;
-    height: 175px;
-    background-image: url(../images/Logo.png);
+
+/* Specific image backgrounds */
+#carousel-img1 {
+    background-image: url(../images/carousel-img1.jpg);
+}
+
+#carousel-img2 {
+    background-image: url(../images/carousel-img2.jpg);
+}
+
+#carousel-img3 {
+    background-image: url(../images/carousel-img3.jpg);
+}
+
+/* Logo Styles */
+#Logo, #LogoFooter{
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 100px;
+    background-image: url(../images/Logo.png);
+}
+#Logo {
+    width: 175px;
+    height: 175px;
+}
+#LogoFooter{
+    width: 130px;
+    height: 130px;
+}
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .carousel-item .col {
+        height: 25rem;
+        /* Adjust height for smaller screens */
+    }
+
+    #CarouselTitle {
+        font-size: clamp(24px, 4vw, 36px);
+        /* Responsive title size */
+    }
+
+    #CarouselPagaraph, .card h3{
+        font-size: clamp(16px, 2vw, 24px);
+        /* Adjust paragraph text size for smaller screens */
+    }
 }
 #LogoContainer{
     background-color: rgb(234, 216, 177);
@@ -80,36 +119,72 @@
 #HeadNav{
     background-color: rgb(212, 195, 158);
 }
-
-/* Product card */
-.CardContainer{
-    width: 300px;
-    height: 300px;
+#footer{
+    background-color: rgb(234, 216, 177);
 }
-.card-img-top {
-    width: 100%;
-    height: 300px;
+
+
+/* Best Sellers Section */
+/* Product Cards */
+
+.card h3 {
+    font-size: 150%;
+}
+.card{
+    height: 100%;
 }
 .card-body{
-    background-color: #EDDFE0;
+    background-color: rgb(211, 220, 182);
+    width: 100%;
+    height: 100%;
 }
-.card {
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
 }
-.card p, .card h3, .card h5 {
-    font-family: "Barlow Condensed", sans-serif, Arial, Helvetica, sans-serif;
+.card-content{
+    height: 150px;
 }
-.btn-primary {
-    border-radius: 50px;
-    width: 120px;
+.section-bestsellers .carousel-indicators{
+    bottom: -37px !important;
+}
+.carousel-indicators button{
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 70%;
+}
+.section-bestsellers .carousel-control-next{
+    right: -120px !important;
+}
+.section-bestsellers .carousel-control-prev {
+    left: -120px !important;
+}
+.section-bestsellers .container-fluid{
+    background-color: rgb(161, 214, 178);
 }
 
-.btn-primary:hover {
-    background-color: black;
-    border: none;
+
+/* About Us Section */
+
+.section-aboutus p{
+    font-family: "Roboto Slab",sans-serif;
+    font-size: small;
 }
 
-h3, h5 {
-    color: rgb(0, 91, 228);
+.section-aboutus a{
+    text-decoration: none;
+    color: #000;
+}
+
+
+/* Sales Section */
+
+    /* Empty */
+
+
+
+/* Footer */
+
+ul{
+    list-style: none;
 }

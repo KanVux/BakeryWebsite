@@ -3,31 +3,69 @@
 
 ?>
 	</div><!-- container -->
+    <footer>
     <div id="footer">
-        <div class="bg-light p-3 border">
-                <form>
-                    <div class="px-3">
-                        <label class="form-label px-2">Đăng ký nhận thông báo mới nhất</label>
-                        <div class="row px-3 gap-2">
-                            <input type="email" class="col form-control" placeholder="Nhập email của bạn">
-                            <div class="btn col-sm-2 bg-success overflow-hidden text-white">Đăng ký</div>
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-4 d-flex flex-column">
+                    <div class="d-flex flex-row justify-content-center" id="LogoContainer"><div id="LogoFooter"></div></div>
+                    <div class="d-flex">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>&nbsp;Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, Thành Phố Cần Thơ</p>
+                    </div>
+                    <div class="d-flex justify-content-between">   
+                        <p><i class="fa-solid fa-phone"></i>&nbsp;Hotline: 0321456780</p>
+                        <p><i class="fa-solid fa-envelope"></i>&nbsp;Email: kanbakery@gmail.com</p>
+                    </div>
+                    <div class="d-flex justify-content-start gap-3">   
+                        <p>Theo dõi chúng tôi tại:</p>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram text-black"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube text-danger"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 offset-2 align-content-end">
+                    <div class="row text-start">
+                        <div class="col-4">
+                            <h5>Danh mục sản phẩm</h5>
+                            <ul class="px-0">
+                                <li>Bánh ngọt</li>
+                                <li>Bánh kem</li>
+                                <li>Bánh lạnh</li>
+                                <li>Bánh mì</li>
+                                <li>Bánh mặn</li>
+                                <li>Bánh Nướng</li>
+                                <li>Sản phẩm khác</li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Thông tin</h5>
+                            <ul class="px-0">
+                                <li>Về Kan Bakery</li>
+                                <li>Tin tức</li>
+                                <li>Ưu đãi</li>
+                                <li>Tuyển dụng</li>
+                                <li>Liên hệ</li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Thông tin thêm</h5>
+                            <ul class="px-0">
+                                <li>Hướng Dẫn Mua Hàng</li>
+                                <li>Chính Sách Giao Hàng</li>
+                                <li>Chính Sách Bảo Mật</li>
+                                <li>Điều Khoản & Điều Kiện</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="row px-3">
-                        <div class="fa-stack fa-2x py-2 px-0 col-1">
-                            <a href="#" class="text-decoration-none text-black">
-                                <i class="fa fa-circle text-black fa-stack-1x" style="font-size: 33px;"></i>
-                                <i class="fa fa-solid fa-phone text-white fs-5 fa-stack-1x"></i>
-                            </a>
-                        </div>
-
-                        <div class="col mt-4 p-0">
-                            <h5 class="fw-normal">Hỗ trợ / Đặt hàng: 0912345678</h5>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-        <div class="fw-2 text-center">Copyright &copy; 2024 Kan Bakery</div>
+        </div>
+        <hr class="m-1">
+        <div>
+            <p class="text-center p-1">&copy;&nbsp;Copyright by Kan Bakery</p>
+        </div>
     </div>
+    </footer>
 </body>
 </html>

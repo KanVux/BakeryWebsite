@@ -35,63 +35,61 @@ function is_administrator($user = 'me')
         <div class="d-flex flex-row justify-content-center" id="LogoContainer">
             <div id="Logo"></div>
         </div>
-        <nav class="navbar navbar-expand-md navbar-light" id="HeadNav">
+        <nav class="navbar navbar-expand-lg navbar-light" id="HeadNav">
             <div class="container-fluid m-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-5 mx-2">
-                    <li class="nav-item">
-                        <a class="nav-link active fs-5" aria-current="page" href="#">Trang chủ</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sản phẩm
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php
-                                require_once __DIR__ . '/../partials/db_connect.php';
+                    <div class="d-flex flex-row justify-content-center" style="width: 100%">
+                    <ul class="d-flex flex-row justify-content-evenly navbar-nav mb-2 mb-lg-0 gap-5 mx-3" style="width: 100%">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-5" aria-current="page" href="#">Trang chủ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sản phẩm
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <?php
+                                    require_once __DIR__ . '/../partials/db_connect.php';
 
-                                $querry = 'SELECT * FROM category';
-                                try {
-                                    $statement = $pdo->prepare($querry);
-                                    $statement->execute();
-                                    
-                                    while($rows = $statement->fetch()) {
-                                        echo '<li><a class="dropdown-item" href="#">'. $rows['category_name'] .'</a></li>';
-                                    } 
-                                } catch (PDOException $e) {
-                                    $error_message = 'Không thể lấy dữ liệu';
-                                    $reason = $pdo->getMessage();
-                                    include __DIR__ . '/../partials/show_error.php';
-                                }
-                            ?>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item fs-5" href="#">Sản phẩm khác</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="#">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="#">Tin tức và Ưu đãi</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Về chúng tôi
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Đội ngũ</a></li>
-                            <li><a class="dropdown-item" href="#">Vị trí</a></li>
-                            <li><a class="dropdown-item" href="#">Thông tin liên hệ</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                                    $querry = 'SELECT * FROM category';
+                                    try {
+                                        $statement = $pdo->prepare($querry);
+                                        $statement->execute();
+                                        
+                                        while($rows = $statement->fetch()) {
+                                            echo '<li><a class="dropdown-item" href="#">'. $rows['category_name'] .'</a></li>';
+                                        } 
+                                    } catch (PDOException $e) {
+                                        $error_message = 'Không thể lấy dữ liệu';
+                                        $reason = $e->getMessage();
+                                        include __DIR__ . '/../partials/show_error.php';
+                                    }
+                                ?>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item fs-5" href="#">Sản phẩm khác</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="#">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="#">Tin tức và Ưu đãi</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Về chúng tôi
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Đội ngũ</a></li>
+                                <li><a class="dropdown-item" href="#">Vị trí</a></li>
+                                <li><a class="dropdown-item" href="#">Thông tin liên hệ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </div>
                 </div>
             </div>
         </nav>
