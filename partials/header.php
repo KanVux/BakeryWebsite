@@ -15,7 +15,7 @@ function is_administrator($user = 'me')
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" media="all" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -32,21 +32,21 @@ function is_administrator($user = 'me')
 
 <body>
     <header>
-        <div class="container-fluid">
-            
+        <div class="d-flex flex-row justify-content-center" id="LogoContainer">
+            <div id="Logo"></div>
         </div>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light" id="HeadNav">
+            <div class="container-fluid m-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-5 mx-2">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                        <a class="nav-link active fs-5" aria-current="page" href="#">Trang chủ</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sản phẩm
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -59,28 +59,26 @@ function is_administrator($user = 'me')
                                     $statement->execute();
                                     
                                     while($rows = $statement->fetch()) {
-                                        echo '<li><a class="dropdown-item" href="#">'. $rows['name'] .'</a></li>';
+                                        echo '<li><a class="dropdown-item" href="#">'. $rows['category_name'] .'</a></li>';
                                     } 
                                 } catch (PDOException $e) {
                                     $error_message = 'Không thể lấy dữ liệu';
                                     $reason = $pdo->getMessage();
                                     include __DIR__ . '/../partials/show_error.php';
                                 }
-
-
                             ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Sản phẩm khác</a></li>
+                            <li><a class="dropdown-item fs-5" href="#">Sản phẩm khác</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Gallery</a>
+                        <a class="nav-link fs-5" href="#">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tin tức và Ưu đãi</a>
+                        <a class="nav-link fs-5" href="#">Tin tức và Ưu đãi</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Về chúng tôi
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -97,7 +95,7 @@ function is_administrator($user = 'me')
                 </div>
             </div>
         </nav>
+        
     </header>
     <div id="container">
-        <br>
         <!-- BEGIN CHANGEABLE CONTENT. -->
