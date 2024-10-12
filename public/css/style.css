@@ -113,30 +113,26 @@ h1,h2,h3,h4, nav a {
         /* Adjust paragraph text size for smaller screens */
     }
 }
-#LogoContainer{
+#LogoContainer, #footer{
     background-color: rgb(234, 216, 177);
 }
-#HeadNav{
+#HeadNav,
+.search-box-container{
     background-color: rgb(212, 195, 158);
 }
-#footer{
-    background-color: rgb(234, 216, 177);
-}
-
-
 /* Best Sellers Section */
 /* Product Cards */
 
 .card h3 {
-    font-size: 150%;
+    font-size: 130%;
 }
 .card{
-    height: 100%;
+    max-height: 100%;
 }
 .card-body{
-    background-color: rgb(211, 220, 182);
-    width: 100%;
-    height: 100%;
+    background-color: rgb(233, 221, 161);
+    max-width: 100%;
+    max-height: 100%;
 }
 .card-img-top {
     height: 150px;
@@ -159,9 +155,7 @@ h1,h2,h3,h4, nav a {
 .section-bestsellers .carousel-control-prev {
     left: -120px !important;
 }
-.section-bestsellers .container-fluid{
-    background-color: rgb(161, 214, 178);
-}
+
 
 
 /* About Us Section */
@@ -188,3 +182,57 @@ h1,h2,h3,h4, nav a {
 ul{
     list-style: none;
 }
+.slogan h2, .slogan h4{
+    color: rgb(69, 130, 49);
+}
+.slogan h4{
+    font-size: clamp(17px, 1.3vw , 100px);
+}
+.slogan h2 {
+    font-size: clamp(20px, 2vw , 100px);
+}
+/* Login Page */
+
+.custom-btn{
+    background-color: rgb(138, 191, 163) !important;
+}
+.custom-btn:hover{
+    background-color: rgb(255, 191, 97) !important;
+}
+.form-floating > label {
+    color: #767676;
+}
+
+#customerEmailInput, #customerPasswordInput{
+    border-radius: 0;
+}
+.icon-container{
+    width: 2.5rem;
+    height:2.5rem;
+    background-color: rgb(160, 146, 115);
+}
+.search-box .btn {
+    background-color: rgb(255, 247, 209) !important;
+}
+.search-box .btn:hover{
+    background-color: rgb(255, 191, 97) !important;
+}
+.fa{
+    color: rgb(231, 229, 221);
+}
+
+/*Product Page*/
+
+.list-unstyled .btn::before{
+    font-family: "Font Awesome 5 Free";
+    content: "\f078";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 800;
+    transition: rotate 0.4s;
+}
+.collapsed::before{
+    rotate: -90deg;
+}
+

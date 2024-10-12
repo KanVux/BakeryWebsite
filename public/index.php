@@ -1,6 +1,5 @@
 <?php
 include_once __DIR__ . '/../partials/header.php';
-include_once __DIR__ . '/../partials/db_connect.php';
 ?>
 <section class="section-hero mb-5">
     <div class="carousel slide" id="carouselExample" data-bs-ride="carousel">
@@ -110,7 +109,7 @@ include_once __DIR__ . '/../partials/db_connect.php';
                                                 <p class="card-text">' . $rows['product_description'] . '</p>
                                                 <div class="d-flex justify-content-between">
                                                     <h3 class="text-success">' . $rows['price'] . ' VND</h3>
-                                                    <button class="btn btn-primary">Buy Now</button>
+                                                    <button class="btn btn-warning border border-secondary shadow-sm">Buy Now</button>
                                                 </div>
                                             </div>
                                         </div>

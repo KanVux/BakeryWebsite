@@ -7,7 +7,5 @@ try {
     $error_message = 'Không thể kết nối đến CSDL';
     $reason = $e->getMessage();
     include 'show_error.php';
-
-    include_once 'footer.php';
     exit();
 }
