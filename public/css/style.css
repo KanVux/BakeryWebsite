@@ -236,3 +236,10 @@ ul{
     rotate: -90deg;
 }
 
+
+/* About Us Page */
+
+.stores{
+    height: 450px;
+    overflow-y: scroll;
+}

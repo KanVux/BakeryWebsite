@@ -2,6 +2,11 @@
 define("TITLE", "Sản phẩm");
 include_once __DIR__ . '/../partials/header.php';
 ?>
+<section class="Title py-3">
+    <div class="container">
+        <h2 class="text-center">Sản phẩm</h2>
+    </div>
+</section>
 <section class="section-products mb-5">
     <div class="container pt-3">
         <div class="row">
