@@ -150,7 +150,7 @@ include_once __DIR__ . '/../partials/header.php';
             <div class="col-md-6"><img src="images/index_aboutus.jpg" alt="" class="img-fluid rounded-3"></div>
             <div class="col-md-5 d-flex flex-column justify-content-around">
                 <h2>Giới thiệu về Kan Bakery</h2>
-                <p style="text-align: justify;">Kan Bakery là một tiệm bánh nhỏ với phong cách làm bánh thủ công,
+                <p class="text-justify">Kan Bakery là một tiệm bánh nhỏ với phong cách làm bánh thủ công,
                     mang đến hương vị tươi ngon và tinh tế cho khách hàng.<br><br>
                     Tiệm luôn chú trọng đến chất lượng trong từng sản phẩm, từ bánh mì, bánh ngọt cho đến bánh kem.
                     Với sự tỉ mỉ trong khâu chọn lựa nguyên liệu và quy trình làm bánh, mỗi chiếc bánh đều đảm bảo vị

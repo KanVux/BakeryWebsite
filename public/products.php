@@ -13,10 +13,10 @@ include_once __DIR__ . '/../partials/header.php';
             <div class="col-3">
                 <ul class="list-unstyled">
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#priceTag">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#priceTag">
                             <h5 class="mx-1 m-0">GIÁ THÀNH</h5>
                         </button>
-                        <div class="collapse" id="priceTag">
+                        <div class="collapse show" id="priceTag">
                             <ul class="list-unstyled mb-0 py-3 pt-md-1">
                                 <input type="checkbox" class="form-check-input" id="priceRange1">
                                 <label for="priceRange1">100.000 - 300.000</label>
@@ -36,10 +36,10 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                     </li>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#sizeTag">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#sizeTag">
                             <h5 class="mx-1 m-0">KÍCH THƯỚC</h5>
                         </button>
-                        <div class="collapse" id="sizeTag">
+                        <div class="collapse show" id="sizeTag">
                             <ul class="list-unstyled mb-0 py-3 pt-md-1">
                                 <input type="checkbox" class="form-check-input" id="size1">
                                 <label for="size1">16cm</label>
@@ -55,10 +55,10 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                     </li>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#flavourTag">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#flavourTag">
                             <h5 class="mx-1 m-0">HƯƠNG VỊ</h5>
                         </button>
-                        <div class="collapse" id="flavourTag">
+                        <div class="collapse show" id="flavourTag">
                             <ul class="list-unstyled mb-0 py-3 pt-md-1">
                                 <input type="checkbox" class="form-check-input" id="flavour1">
                                 <label for="flavour1">Sôcôla</label>
@@ -78,10 +78,10 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                     </li>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#shapeTag">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#shapeTag">
                             <h5 class="mx-1 m-0">HÌNH DẠNG</h5>
                         </button>
-                        <div class="collapse" id="shapeTag">
+                        <div class="collapse show" id="shapeTag">
                             <ul class="list-unstyled mb-0 py-3 pt-md-1">
                                 <input type="checkbox" class="form-check-input" id="shape1">
                                 <label for="shape1">Mẫu có sẵn hằng ngày</label>
@@ -130,6 +130,23 @@ include_once __DIR__ . '/../partials/header.php';
                     echo "Error: " . $e->getMessage();
                 }
                 ?>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-banner">
+    <div class="container bg-warning-subtle">
+        <div class="row align-items-center border rounded-2">
+            <div class="col-6 p-0">
+                <img src="images/aboutus3.jpg" alt="" class="img-fluid rounded-start-2">
+            </div>
+            <div class="col-6">
+                <h4 class="text-center p-1">Cửa hàng Kan Bakery gần tôi</h4>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary btn-lg">
+                        Tìm kiếm
+                    </button>
+                </div>
             </div>
         </div>
     </div>

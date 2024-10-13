@@ -33,10 +33,10 @@ include_once __DIR__ . '/../partials/header.php';
                 <div class="d-flex">
                     <ul class="list-unstyled w-100 stores">
                     <li class="mb-1 ">
-                        <button class="btn  d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district1">
+                        <button class="btn  d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district1">
                             <h5 class="mx-1 m-0">Ninh Kiều</h5>
                         </button>
-                        <div class="collapse" id="district1">
+                        <div class="collapse show" id="district1">
                             <div class="d-flex flex-column ps-4">
                                 <h5>Địa chỉ 1</h5>
                                 <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
@@ -46,10 +46,10 @@ include_once __DIR__ . '/../partials/header.php';
                         <hr class="m-0">
                     </li>
                    <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district2">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district2">
                             <h5 class="mx-1 m-0">Bình Thủy</h5>
                         </button>
-                        <div class="collapse" id="district2">
+                        <div class="collapse show" id="district2">
                             <div class="d-flex flex-column ps-4">
                                 <h5>Địa chỉ 2</h5>
                                 <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
@@ -59,10 +59,10 @@ include_once __DIR__ . '/../partials/header.php';
                         <hr class="m-0">
                     </li>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district3">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district3">
                             <h5 class="mx-1 m-0">Cái Răng</h5>
                         </button>
-                        <div class="collapse" id="district3">
+                        <div class="collapse show" id="district3">
                             <div class="d-flex flex-column ps-4">
                                 <h5>Địa chỉ 3</h5>
                                 <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
@@ -72,10 +72,10 @@ include_once __DIR__ . '/../partials/header.php';
                         <hr class="m-0">
                     </li>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded collapsed p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district4">
+                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district4">
                             <h5 class="mx-1 m-0">Ô Môn</h5>
                         </button>
-                        <div class="collapse" id="district4">
+                        <div class="collapse show" id="district4">
                             <div class="d-flex flex-column ps-4">
                                 <h5>Địa chỉ 4</h5>
                                 <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
@@ -93,7 +93,58 @@ include_once __DIR__ . '/../partials/header.php';
         </div>
     </div>
 </section>
+<section class="Title py-3">
+    <div class="container">
+        <h2 class="text-center">Về chúng tôi</h2>
+    </div>
+</section>
+<section>
+    <div class="container bg-white rounded-2">
+        <div class="container d-flex justify-content-center flex-column p-2">
+            <h3 class="text-center">Thông tin về thương hiệu</h3>
+            <div class="d-flex gap-3">
+                <p><i class="fa-solid fa-calendar-days"></i>&nbsp;13/10/2024</p>
+                <p><i class="fa-solid fa-comment"></i>&nbsp;0</p>
+                <p><i class="fa-solid fa-user"></i>&nbsp;Hà Vũ Khang</p>
+            </div>
+            <hr class="m-0">
+            <div class="container d-flex p-3 px-5 flex-column gap-2">
+                <div class="d-flex gap-4">
+                    <img src="images/aboutus1.jpg" alt="" class="img-thumbnail w-25">
+                    <div class="d-inline">
+                        <h4>Giới thiệu</h4>
+                        <p class="text-justify" >Kan Bakery ra đời từ niềm đam mê cháy bỏng với nghệ thuật làm bánh và mong muốn mang đến cho mọi người những khoảnh khắc ngọt ngào,
+                            trọn vẹn nhất. Chúng tôi không chỉ là một tiệm bánh đơn thuần mà còn là nơi gửi gắm tình yêu thương, sáng tạo và sự tận tâm vào từng sản phẩm.
+                            Tại đây, mỗi chiếc bánh là kết tinh của sự cầu kỳ trong từng khâu chuẩn bị, 
+                            từ việc lựa chọn nguyên liệu tươi ngon nhất đến quá trình chế biến cẩn thận và sáng tạo.</p>
+                        <h4>Sứ Mệnh của Chúng Tôi</h4>
+                        <p class="text-justify">Sứ mệnh của chúng tôi là mang đến cho mọi người những khoảnh khắc hạnh phúc, 
+                            trọn vẹn qua từng chiếc bánh. Chúng tôi tin rằng, mỗi chiếc bánh không chỉ là một món ăn mà còn là biểu tượng của niềm vui, tình yêu thương và sự gắn kết.
+                             Với mong muốn trở thành thương hiệu bánh ngọt được yêu thích và tin cậy, chúng tôi luôn không ngừng nỗ lực để tạo ra những sản phẩm tuyệt vời nhất..</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4">
+                    <div class="d-inline">
+                        <h4>Đội Ngũ của Chúng Tôi</h4>
+                        <p class="text-justify">Đội ngũ làm bánh tại Kan Bakery gồm những thợ làm bánh dày dạn kinh nghiệm, luôn tâm huyết với từng sản phẩm. 
+                            Chúng tôi sử dụng những công thức truyền thống kết hợp với phong cách hiện đại, 
+                            đảm bảo mỗi chiếc bánh đều mang đến hương vị tuyệt hảo và hình thức bắt mắt.</p>
 
+                        <h4>Cam Kết Chất Lượng</h4>
+                        <p class="text-justify">Tại Kan Bakery, chất lượng là tiêu chí hàng đầu. Chúng tôi cam kết sử dụng nguyên liệu tự nhiên, không chứa phẩm màu độc hại hay chất bảo quản.
+                            Mỗi sản phẩm đều trải qua quy trình kiểm tra nghiêm ngặt trước khi đến tay khách hàng.</p>
+
+                        <h4>Hãy Tham Gia Cùng Chúng Tôi</h4>
+                        <p class="text-justify">Chúng tôi không chỉ là một cửa hàng bánh, mà còn là một cộng đồng yêu thích sự ngọt ngào.
+                            Hãy theo dõi chúng tôi trên mạng xã hội để cập nhật những sản phẩm mới, chương trình khuyến mãi hấp dẫn và các sự kiện đặc biệt.</p>
+                        </div> 
+                        <img src="images/aboutus2.jpg" alt="" class="img-thumbnail w-50">                      
+                    </div>
+                    <h5 class="text-justify text-center pt-2">Cảm ơn bạn đã lựa chọn Kan Bakery. Chúng tôi mong muốn được phục vụ bạn những chiếc bánh tuyệt vời nhất!</h>
+            </div>
+        </div>
+    </div>
+</section>
 <?php
 include_once __DIR__ . '/../partials/footer.php';
 ?>
