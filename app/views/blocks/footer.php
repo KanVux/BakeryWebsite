@@ -5,10 +5,10 @@
     <div class="container py-5 slogan">
         <h2 class="text-center mb-5">“Ngọt ngào từng miếng, trọn vẹn yêu thương!”</h2>
         <div class="d-flex justify-content-between">
-            <div class="justify-content-center text-center"><img src="images/icon-Footer-1.svg" alt="" class="img-fluid"><h4 class="mt-3">Nguyên liệu chất lượng</h4></div>
-            <div class="justify-content-center text-center"><img src="images/icon-Footer-2.svg" alt="" class="img-fluid"><h4 class="mt-3">Làm mới mỗi ngày</h4></div>
-            <div class="justify-content-center text-center"><img src="images/icon-Footer-3.svg" alt="" class="img-fluid"><h4 class="mt-3">Đảm bảo vệ sinh</h4></div>
-            <div class="justify-content-center text-center"><img src="images/icon-Footer-4.svg" alt="" class="img-fluid"><h4 class="mt-3">Giao hàng nhanh chóng</h4></div>
+            <div class="justify-content-center text-center"><img src="/assets/client/images/footer/icon-Footer-1.svg" alt="" class="img-fluid"><h4 class="mt-3">Nguyên liệu chất lượng</h4></div>
+            <div class="justify-content-center text-center"><img src="/assets/client/images/footer/icon-Footer-2.svg" alt="" class="img-fluid"><h4 class="mt-3">Làm mới mỗi ngày</h4></div>
+            <div class="justify-content-center text-center"><img src="/assets/client/images/footer/icon-Footer-3.svg" alt="" class="img-fluid"><h4 class="mt-3">Đảm bảo vệ sinh</h4></div>
+            <div class="justify-content-center text-center"><img src="/assets/client/images/footer/icon-Footer-4.svg" alt="" class="img-fluid"><h4 class="mt-3">Giao hàng nhanh chóng</h4></div>
         </div>
     </div>
 	</div><!-- container -->
@@ -76,5 +76,6 @@
         </div>
     </div>
     </footer>
+    <?= $this->section("page_specific_js") ?>
 </body>
 </html>

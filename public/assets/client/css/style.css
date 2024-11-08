@@ -72,15 +72,15 @@ h1,h2,h3,h4, nav a {
 
 /* Specific image backgrounds */
 #carousel-img1 {
-    background-image: url(../images/carousel-img1.jpg);
+    background-image: url(/assets/client/images/home/carousel/carousel-img1.jpg);
 }
 
 #carousel-img2 {
-    background-image: url(../images/carousel-img2.jpg);
+    background-image: url(/assets/client/images/home/carousel/carousel-img2.jpg);
 }
 
 #carousel-img3 {
-    background-image: url(../images/carousel-img3.jpg);
+    background-image: url(/assets/client/images/home/carousel/carousel-img3.jpg);
 }
 
 /* Logo Styles */
@@ -88,7 +88,7 @@ h1,h2,h3,h4, nav a {
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 100px;
-    background-image: url(../images/Logo.png);
+    background-image: url(/assets/client/images/logo/Logo.png);
 }
 #Logo {
     width: 175px;
@@ -172,7 +172,10 @@ h1,h2,h3,h4, nav a {
     color: #000;
 }
 
-
+.section-aboutus img{
+    max-width: 28rem;
+    object-fit: contain;
+}
 /* Sales Section */
 
     /* Empty */
