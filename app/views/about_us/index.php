@@ -12,77 +12,29 @@
             <div class="col-4">
                 <div class="row mt-3">
                     <div class="col">
-                        <div class="form-floating mb-3" >
-                            <select class="form-select" id="customerDistrict1Input">
-                                <option selected>Ninh Kiều</option>
-                                <option value="1">Bình Thủy</option>
-                                <option value="2">Cái Răng</option>
-                                <option value="3">Ô Môn</option>
-                            </select>
-                            <label for="customerDistrict1Input">Quận</label>
-                        </div>
-                    </div>
-                    <div class="col">
+                        <h5 class="mx-1">Tìm địa chỉ:</h5>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="customerAddress1Input" placeholder="Địa chỉ..">
+                            <input type="text" class="form-control" id="customerAddress1Input" placeholder="Địa chỉ.." data-search>
                             <label for="customerAddress1Input">Địa chỉ..</label>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex">
-                    <ul class="list-unstyled w-100 stores">
-                    <li class="mb-1 ">
-                        <button class="btn  d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district1">
-                            <h5 class="mx-1 m-0">Ninh Kiều</h5>
-                        </button>
-                        <div class="collapse show" id="district1">
-                            <div class="d-flex flex-column ps-4">
-                                <h5>Địa chỉ 1</h5>
-                                <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
-                                <p><i class="fa text-black fa-phone"></i>&nbsp; 0321456780</p>
-                            </div>
-                        </div>
-                        <hr class="m-0">
-                    </li>
-                   <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district2">
-                            <h5 class="mx-1 m-0">Bình Thủy</h5>
-                        </button>
-                        <div class="collapse show" id="district2">
-                            <div class="d-flex flex-column ps-4">
-                                <h5>Địa chỉ 2</h5>
-                                <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
-                                <p><i class="fa text-black fa-phone"></i>&nbsp; 0321456780</p>
-                            </div>
-                        </div>
-                        <hr class="m-0">
-                    </li>
+                    <ul class="list-unstyled w-100 stores" data-address-ul>
+                    <template>
                     <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district3">
-                            <h5 class="mx-1 m-0">Cái Răng</h5>
+                        <button class="btn  d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district1" data-district-button>
+                            <h5 class="mx-1 m-0" data-address-district></h5>
                         </button>
-                        <div class="collapse show" id="district3">
+                        <div class="collapse show" id="district" data-district>
                             <div class="d-flex flex-column ps-4">
-                                <h5>Địa chỉ 3</h5>
-                                <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
-                                <p><i class="fa text-black fa-phone"></i>&nbsp; 0321456780</p>
+                                <div class="d-flex"><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp;<p data-address-detail></p></div>
+                                <div class="d-flex"><i class="fa text-black fa-phone"></i>&nbsp;<p data-address-phone></p></div>
                             </div>
                         </div>
                         <hr class="m-0">
                     </li>
-                    <li class="mb-1">
-                        <button class="btn d-inline-flex align-items-center rounded p-0 py-2 border-0" data-bs-toggle="collapse" data-bs-target="#district4">
-                            <h5 class="mx-1 m-0">Ô Môn</h5>
-                        </button>
-                        <div class="collapse show" id="district4">
-                            <div class="d-flex flex-column ps-4">
-                                <h5>Địa chỉ 4</h5>
-                                <p><i class="fa fa-solid text-black fa-location-dot"></i>&nbsp; Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TPCT</p>
-                                <p><i class="fa text-black fa-phone"></i>&nbsp; 0321456780</p>
-                            </div>
-                        </div>
-                        <hr class="m-0">
-                    </li>
+                    </template>
                 </div>
             </div>
             <div class="col-8">
@@ -146,4 +98,57 @@
         </div>
     </div>
 </section>
+<?php $this->stop()?>
+
+<?php $this->start("page_specific_js")?>
+<script>
+const addressContainer = document.querySelector("[data-address-ul]"); // Lấy container cha
+const searchInput = document.querySelector("[data-search]");
+const template = document.querySelector("template"); // Lấy template từ HTML
+
+let addresses = [
+    { district: "Ninh Kiều", detail: "Đường 3/2, P.Xuân Khánh, Q.Ninh Kiều, TP.Cần Thơ", phone: '0321456780' },
+    { district: "Ô Môn", detail: "Tôn Đức Thắng, Khu Vực 5, P. Châu Văn Liêm, Q.Ô Môn, TP. Cần Thơ", phone: '03123442780' },
+    { district: "Bình Thủy", detail: "Đường Cách mạng tháng 8, P. Bùi Hữu Nghĩa, Q.Bình Thủy, TP.Cần Thơ", phone: '0377752180' },
+    { district: "Cái Răng", detail: "KV Yên Hạ, P.Lê Bình, Q.Cái Răng, TP.Cần Thơ", phone: '0912345622' }
+];
+let districtCounter = 1; 
+// Gắn các địa chỉ vào addressContainer
+let addressList = addresses.map(address => {
+    const addressElement = template.content.cloneNode(true).firstElementChild;
+
+    // Gắn dữ liệu vào các trường trong template
+    addressElement.querySelector("[data-address-district]").textContent = address.district;
+    addressElement.querySelector("[data-address-detail]").textContent = address.detail;
+    addressElement.querySelector("[data-address-phone]").textContent = address.phone;
+    
+    const districtId = `district${districtCounter}`;
+    const districtElement = addressElement.querySelector("[data-district]");
+    const districtButton =addressElement.querySelector("[data-district-button]");
+    districtElement.id = districtId;  // Gán id cho phần tử collapse
+    districtButton.setAttribute("data-bs-target",`#${districtId}`)
+    // Tăng biến đếm để gán id cho phần tử tiếp theo
+    console.log(districtCounter)
+    districtCounter++;
+    // Thêm phần tử vào DOM
+    addressContainer.appendChild(addressElement);
+
+    // Trả về một đối tượng chứa cả thông tin địa chỉ và element tương ứng
+    return { ...address, element: addressElement };
+});
+
+// Bộ lọc tìm kiếm
+searchInput.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    addressList.forEach(address => {
+        const isVisible = address.district.toLowerCase().includes(value) || address.detail.toLowerCase().includes(value);
+        if (isVisible) {
+            address.element.removeAttribute("hidden"); // Hiển thị phần tử
+        } else {
+            address.element.setAttribute("hidden", "true"); // Ẩn phần tử
+        }
+    });
+});
+
+</script>
 <?php $this->stop()?>

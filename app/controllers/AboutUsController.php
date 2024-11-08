@@ -8,6 +8,9 @@ class AboutUsController extends Controller{
     }
 
     public function index() {
-        $this->renderPage('about_us/index');
+        $title = 'About Us';
+        $this->renderPage('about_us/index', [
+            'title' => $title
+        ]);
     }
 }
