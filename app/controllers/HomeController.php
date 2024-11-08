@@ -14,11 +14,6 @@ class HomeController extends Controller{
         $title = 'Home Page';
         $productController = new ProductController();
         $products = $productController->getCarouselProducts();
-        // // ob_start();
-        // include 'app/views/home/index.php';
-        // $content = ob_get_clean();
-
-        // require_once ROOTDIR . 'app/views/layout/client_layout.php'; 
         $this->renderPage('home/index', [
             'products' => $products ?? [],
             'title' => $title
