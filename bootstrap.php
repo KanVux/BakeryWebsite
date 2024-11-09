@@ -22,5 +22,7 @@ try {
 } catch (Exception $ex) {
     echo 'Không thể kết nối đến MySQL,
 		kiểm tra lại username/password đến MySQL.<br>';
-    echo 'Chi tiết lỗi: '.$ex->getMessage();
+    dd($ex);
 }
+
+$AUTHGUARD = new Helpers\SessionGuard();

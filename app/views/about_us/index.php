@@ -14,8 +14,8 @@
                     <div class="col">
                         <h5 class="mx-1">Tìm địa chỉ:</h5>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="customerAddress1Input" placeholder="Địa chỉ.." data-search>
-                            <label for="customerAddress1Input">Địa chỉ..</label>
+                            <input type="text" class="form-control" id="address" placeholder="Địa chỉ.." data-search>
+                            <label for="address">Địa chỉ..</label>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,6 @@ let addressList = addresses.map(address => {
     districtElement.id = districtId;  // Gán id cho phần tử collapse
     districtButton.setAttribute("data-bs-target",`#${districtId}`)
     // Tăng biến đếm để gán id cho phần tử tiếp theo
-    console.log(districtCounter)
     districtCounter++;
     // Thêm phần tử vào DOM
     addressContainer.appendChild(addressElement);

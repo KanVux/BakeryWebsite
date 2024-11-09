@@ -13,6 +13,12 @@ $router->get('/home','\App\Controllers\HomeController@index');
 $router->get('/about_us','\App\Controllers\AboutUsController@index');
 // Errors routes
 $router->set404('\App\Controllers\Controller@render404');
+// Auth routes
+$router->get('/login','\App\Controllers\Auth\LoginController@create');
+$router->post('/login', '\App\Controllers\Auth\LoginController@store');
+$router->get('/register', '\App\Controllers\Auth\RegisterController@create');
+$router->post('/register', '\App\Controllers\Auth\RegisterController@store');
+
 
 $router->get('/catagory','\App\Controllers\CategoryController@index');
 

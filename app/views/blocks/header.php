@@ -1,17 +1,3 @@
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if(!function_exists('is_administrator')){
-    function is_administrator($user = 'me')
-    {
-        return (isset($_SESSION['user']) && ($_SESSION['user'] === $user));
-    }
-}
-
-?>
 <!doctype html>
 <html lang="en">
 
@@ -53,10 +39,21 @@ if(!function_exists('is_administrator')){
                             </div>
                         </a> 
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="">
-                        <li><a class="dropdown-item" href="/login">Tài khoản</a></li>
-                        <li><a class="dropdown-item" href="/Settings">Cài đặt</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                        <?php if(!AUTHGUARD()->isUserLoggedIn()) : ?>
+                            <li><a class="dropdown-item" href="/login">Đăng nhập</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/register">Đăng ký</a></li>
+                        <?php else :?>
+                            <li>
+                                <a class="dropdown-item">
+                                    <?= $this->e(AUTHGUARD()->user()->name) ?>
+                                    <span class="caret"></span>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>  
+                            <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form).submit(); ">Đăng xuất</a></li>
+                            <form id="logout-form" class="d-none" action="/logout" method="POST"></form>
+                        <?php endif ?>
                     </ul>
                     </div>
 
