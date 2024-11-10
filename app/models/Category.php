@@ -35,7 +35,7 @@ class Category extends Model{
     // Cập nhật danh mục
     public function edit(array $data): bool
     {
-        if ($this->id) {
+        if ($this->category_id) {
             $this->fill($data);
             return $this->save(); // Cập nhật vào cơ sở dữ liệu
         }
@@ -45,9 +45,9 @@ class Category extends Model{
     // Xóa danh mục
     public function delete(): bool
     {
-        if ($this->id) {
-            $statement = $this->db->prepare("DELETE FROM categories WHERE id = :id");
-            return $statement->execute(['id' => $this->id]);
+        if ($this->category_id) {
+            $statement = $this->db->prepare("DELETE FROM category WHERE id = :id");
+            return $statement->execute(['id' => $this->category_id]);
         }
         return false; // Nếu không có id, trả về false
     }
@@ -55,7 +55,7 @@ class Category extends Model{
     // Tìm danh mục theo ID
     public function findById(int $id): ?Category
     {
-        $statement = $this->db->prepare("SELECT * FROM categories WHERE id = :id");
+        $statement = $this->db->prepare("SELECT * FROM category WHERE id = :id");
         $statement->execute(['id' => $id]);
         $row = $statement->fetch();
         if ($row) {

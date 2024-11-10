@@ -16,7 +16,7 @@ class CategoryController extends Controller
             $category = new Category(PDO());
             $category->add($data); // Lưu danh mục vào cơ sở dữ liệu
 
-            redirect('/admin/categories');
+            redirect('/admin/category');
         }
 
         // Render form thêm danh mục
@@ -30,7 +30,7 @@ class CategoryController extends Controller
         $category = $category->findById($categoryId);
 
         if (!$category) {
-            redirect('/admin/categories');
+            redirect('/admin/category');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
             $category->edit($data); // Cập nhật danh mục vào cơ sở dữ liệu
 
-            redirect('/admin/categories');
+            redirect('/admin/category');
         }
 
         $this->renderPage('admin/editCategory', ['category' => $category]);
@@ -56,6 +56,6 @@ class CategoryController extends Controller
             $category->delete(); // Xóa danh mục khỏi cơ sở dữ liệu
         }
 
-        redirect('/admin/categories');
+        redirect('/admin/category');
     }
 }

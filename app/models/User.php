@@ -1,29 +1,32 @@
 <?php
-
 namespace App\Models;
 
 use PDO;
 
-class User extends Model {
-    protected PDO $db;
-    public int $id = -1;
-    public string $name = '';  // Khởi tạo mặc định
-    public string $password = '';  // Khởi tạo mặc định
-    public string $email = '';  // Khởi tạo mặc định
-    public string $address = '';  // Khởi tạo mặc định
-    public int $acc_type = 0;  // Khởi tạo mặc định
+class User extends Model
+{
+    public int $id = 0;
+    public string $name;
+    public string $email;
+    public string $address = '';
+    public string $password;
+    public int $acc_type = 0; // 0 for regular user, 1 for admin
+    public string $created_at;
+    public string $updated_at;
 
-    public function __construct(PDO $pdo) {
-        $this->db = $pdo;
-    }
-
-
-    public function getUsers(){
-        return $this->getItems($this::class,'users',['*'], null);
-    }
-    public function where(string $column, $value): User
+    public function __construct(PDO $pdo)
     {
-        $statement = $this->db->prepare("select * from users where $column = :value");
+        parent::__construct($pdo);
+    }
+
+    public function getUsers($select = ['*'], $limit = 12): array
+    {
+        return $this->getItems(self::class, 'users', $select, $limit);
+    }
+
+    public function where(string $column, string $value): User
+    {
+        $statement = $this->db->prepare("SELECT * FROM users WHERE $column = :value");
         $statement->execute(['value' => $value]);
         $row = $statement->fetch();
         if ($row) {
@@ -31,103 +34,57 @@ class User extends Model {
         }
         return $this;
     }
+
     public function fillFromDbRow(array $row)
     {
         $this->id = $row['id'];
-        $this->email = $row['email'];
         $this->name = $row['name'];
+        $this->email = $row['email'];
         $this->password = $row['password'];
-        $this->address = $row['address'];
         $this->acc_type = $row['acc_type'];
+        $this->address = $row['address'];
+        $this->created_at = $row['created_at'];
+        $this->updated_at = $row['updated_at'];
     }
-
 
     public function save(): bool
     {
         $result = false;
 
-        if ($this->id >= 0) {
+        if ($this->id <= 0) {
             $statement = $this->db->prepare(
-                'update users set email = :email, username = :name, password = :password,
-          address = :address,updated_at = now() where id = :id'
+                'INSERT INTO users (name, email, password, acc_type, address, created_at, updated_at) 
+                VALUES (:name, :email, :password, :acc_type, :address, now(), now())'
             );
             $result = $statement->execute([
-                'id' => $this->id,
-                'email' => $this->email,
                 'name' => $this->name,
-                'password' => $this->password,
-                'address'=>$this->address
-            ]);
-        } else {
-            $statement = $this->db->prepare(
-                'insert into users (email, name, password, address, created_at, updated_at)
-          values (:email, :name, :password, :address, now(), now())'
-            );
-            $result = $statement->execute([
                 'email' => $this->email,
-                'name' => $this->name,
-                'password' => $this->password,
-                'address' => $this->address
+                'password' => password_hash($this->password, PASSWORD_BCRYPT),
+                'acc_type' => $this->acc_type,
+                'address' => $this->address,
             ]);
+
             if ($result) {
                 $this->id = $this->db->lastInsertId();
             }
+        } else {
+            $statement = $this->db->prepare(
+                'UPDATE users SET name = :name, email = :email, password = :password, 
+                acc_type = :acc_type, address = :address updated_at = now() WHERE id = :id'
+            );
+            $result = $statement->execute([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => password_hash($this->password, PASSWORD_BCRYPT),
+                'address' => $this->address,
+                'acc_type' => $this->acc_type,
+                'id' => $this->id
+            ]);
         }
 
         return $result;
     }
-    public function fill(array $data): User
-    {
-        $this->email = $data['email'];
-        $this->name = $data['name'];
-        $this->password = password_hash($data['password'], PASSWORD_DEFAULT);
-        $this->address = $data['address'];
-        return $this;
-    }
-    private function isEmailInUse(string $email): bool
-    {
-        $statement = $this->db->prepare('select count(*) from users where email = :email');
-        $statement->execute(['email' => $email]);
-        return $statement->fetchColumn() > 0;
-    }
-    public function validate(array $data): array
-    {
-        $errors = [];
 
-        if (!$data['email']) {
-            $errors['email'] = 'Invalid email.';
-        } elseif ($this->isEmailInUse($data['email'])) {
-            $errors['email'] = 'Email already in use.';
-        }
-
-        if (strlen($data['password']) < 6) {
-            $errors['password'] = 'Password must be at least 6 characters.';
-        } elseif ($data['password'] != $data['password_confirmation']) {
-            $errors['password'] = 'Password confirmation does not match.';
-        }
-        return $errors;
-    }
-    public function add(array $data): bool
-    {
-        $this->fill($data); // Điền dữ liệu vào đối tượng
-        $this->password = password_hash($data['password'], PASSWORD_BCRYPT); // Mã hóa mật khẩu
-        return $this->save(); // Lưu vào cơ sở dữ liệu
-    }
-
-    // Cập nhật người dùng
-    public function edit(array $data): bool
-    {
-        if ($this->id) {
-            $this->fill($data); // Điền lại dữ liệu vào đối tượng
-            if (isset($data['password'])) {
-                $this->password = password_hash($data['password'], PASSWORD_BCRYPT); // Mã hóa mật khẩu nếu có
-            }
-            return $this->save(); // Lưu vào cơ sở dữ liệu
-        }
-        return false;
-    }
-
-    // Xóa người dùng
     public function delete(): bool
     {
         if ($this->id) {
@@ -137,16 +94,17 @@ class User extends Model {
         return false;
     }
 
-    // Tìm người dùng theo ID
-    public function findById(int $id): ?User
+    public function fill(array $data): self
     {
-        $statement = $this->db->prepare("SELECT * FROM users WHERE id = :id");
-        $statement->execute(['id' => $id]);
-        $row = $statement->fetch();
-        if ($row) {
-            $this->fillFromDbRow($row);
-            return $this;
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                if ($value === null && gettype($this->$key) === 'string') {
+                    $this->$key = '';
+                } else {
+                    $this->$key = $value;
+                }
+            }
         }
-        return null;
+        return $this;
     }
 }

@@ -5,63 +5,80 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    // Thêm người dùng
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function index()
+    {
+        $users = (new User(PDO()))->getUsers(['*'], null);
+        $this->renderPage('admin/index', [
+            'users' => $users,
+        ]);
+    }
+
     public function addUser()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'password' => $_POST['password'],
-                'acc_type' => $_POST['acc_type'] ?? 0 // 0 là người dùng bình thường, 1 là admin
+                'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+                'acc_type' => $_POST['acc_type'] ?? 0,
             ];
 
             $user = new User(PDO());
-            $user->add($data); // Lưu người dùng vào cơ sở dữ liệu
+            $user->fill($data);
+            $user->save();
 
-            redirect('/admin/users');
+            $_SESSION['success'] = 'User added successfully!';
+            redirect('/admin');
         }
-
-        // Render form thêm người dùng
-        $this->renderPage('admin/addUser');
     }
 
-    // Chỉnh sửa người dùng
     public function editUser($userId)
     {
         $user = new User(PDO());
-        $user = $user->findById($userId);
+        $user = $user->where('id', $userId);
 
         if (!$user) {
-            redirect('/admin/users');
+            $_SESSION['error'] = 'User not found!';
+            redirect('/admin');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
-                'name' => $_POST['name'],
-                'email' => $_POST['email'],
-                'password' => $_POST['password'] ?? $user->password, // Nếu không có password mới, giữ nguyên password cũ
-                'acc_type' => $_POST['acc_type']
+                'name' => $_POST['name'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'password' => $_POST['password'] ? password_hash($_POST['password'], PASSWORD_BCRYPT) : $user->password,
+                'acc_type' => $_POST['acc_type'] ?? 0,
             ];
 
-            $user->edit($data); // Cập nhật người dùng vào cơ sở dữ liệu
+            $user->fill($data);
+            $user->save();
 
-            redirect('/admin/users');
+            $_SESSION['success'] = 'User updated successfully!';
+            redirect('/admin');
         }
 
-        $this->renderPage('admin/editUser', ['user' => $user]);
+        $this->renderPage('admin/edit', [
+            'user' => $user,
+        ]);
     }
 
-    // Xóa người dùng
     public function deleteUser($userId)
     {
         $user = new User(PDO());
-        $user = $user->findById($userId);
+        $user = $user->where('id', $userId);
 
         if ($user) {
-            $user->delete(); // Xóa người dùng khỏi cơ sở dữ liệu
+            $user->delete();
+            $_SESSION['success'] = 'User deleted successfully!';
+        } else {
+            $_SESSION['error'] = 'User not found!';
         }
 
-        redirect('/admin/users');
+        redirect('/admin');
     }
 }

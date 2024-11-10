@@ -41,15 +41,15 @@ $router->post('/admin/edit-product/{id}', 'App\Controllers\ProductController@edi
 $router->get('/admin/delete-product/{id}', 'ProductController@deleteProduct');
 $router->post('/admin/delete-product/(\d+)', 'App\Controllers\ProductController@deleteProduct');
 // Category routes
-$router->post('/admin/add-category', 'CategoryController@addCategory');
-$router->get('/admin/edit-category/{id}', 'CategoryController@editCategory');
-$router->post('/admin/edit-category/{id}', 'CategoryController@editCategory');
-$router->get('/admin/delete-category/{id}', 'CategoryController@deleteCategory');
+$router->get('/admin/categories', 'App\Controllers\UserController@index');
+$router->post('/admin/add-categories', 'App\Controllers\UserController@addUser');
+$router->post('/admin/edit-categories/{id}', 'App\Controllers\UserController@editUser');
+$router->post('/admin/delete-categories/{id}', 'App\Controllers\UserController@deleteUser');
 // User routes
-$router->post('/admin/add-user', 'UserController@addUser');
-$router->get('/admin/edit-user/{id}', 'UserController@editUser');
-$router->post('/admin/edit-user/{id}', 'UserController@editUser');
-$router->get('/admin/delete-user/{id}', 'UserController@deleteUser');
+$router->get('/admin/users', 'App\Controllers\UserController@index');
+$router->post('/admin/add-user', 'App\Controllers\UserController@addUser');
+$router->post('/admin/edit-user/{id}', 'App\Controllers\UserController@editUser');
+$router->post('/admin/delete-user/{id}', 'App\Controllers\UserController@deleteUser');
 
 // Run the Router
 $router->run();

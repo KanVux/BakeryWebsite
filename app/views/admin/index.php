@@ -29,7 +29,7 @@
             <h3 class="text-warning">Danh mục Sản phẩm</h3>
             <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm Sản
                 Phẩm</button>
-            <?php require_once ROOTDIR . 'app/views/product/add.php' ?>
+            <?php include ROOTDIR . 'app/views/product/add.php' ?>
             <table class="table table-striped table-hover">
                 <thead class="table-light">
                     <tr>
@@ -41,40 +41,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($products as $product): ?>
-                        <tr>
-                            <td><?php echo $product->product_id; ?></td>
-                            <td>
-                                <img src="/uploads/<?php echo $product->product_img; ?>" alt="Ảnh sản phẩm" width="50"
-                                    height="50" class="img-thumbnail">
-                            </td>
-                            <td><?php echo $product->product_name; ?></td>
-                            <td><?php echo number_format($product->price); ?> VND</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editProductModal<?php echo $product->product_id; ?>">
-                                    <i class="bi bi-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#deleteProductModal<?php echo $product->product_id; ?>">
-                                    <i class="bi bi-trash"></i> Xóa
-                                </button>
-                            </td>
-                        </tr>
-                        
-                        <!-- Modal Edit -->
-                        <?php require_once ROOTDIR . 'app/views/product/edit.php'; ?>
-                        <!-- Modal Delete -->
-                        <?php require_once ROOTDIR . 'app/views/product/delete.php'; ?>
+                    <?php if (isset($products) && is_array($products)): ?>
+                        <?php foreach ($products as $product): ?>
+                            <tr>
+                                <td><?php echo $product->product_id; ?></td>
+                                <td>
+                                    <img src="/uploads/<?php echo $product->product_img; ?>" alt="Ảnh sản phẩm" width="50"
+                                        height="50" class="img-thumbnail">
+                                </td>
+                                <td><?php echo $product->product_name; ?></td>
+                                <td><?php echo number_format($product->price); ?> VND</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editProductModal<?php echo $product->product_id; ?>">
+                                        <i class="bi bi-pencil"></i> Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteProductModal<?php echo $product->product_id; ?>">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                            <!-- Modal Edit -->
+                            <?php include ROOTDIR . 'app/views/product/edit.php'; ?>
+                            <!-- Modal Delete -->
+                            <?php include ROOTDIR . 'app/views/product/delete.php'; ?>
 
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>    
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center">Không có sản phẩm nào</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
-        <!-- Các tab còn lại cho người dùng và danh mục sản phẩm -->
+        <!-- Người dùng Tab -->
         <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
             <h3 class="text-warning">Danh sách Người dùng</h3>
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">Thêm Người Dùng</button>
+            <?php include ROOTDIR . 'app/views/user/add.php' ?>
             <table class="table table-striped table-hover">
                 <thead class="table-light">
                     <tr>
@@ -86,105 +94,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
-                        <tr>
-                            <td><?php echo $user->id; ?></td>
-                            <td><?php echo $user->name; ?></td>
-                            <td><?php echo $user->email; ?></td>
-                            <td>
-                                <?php echo $user->acc_type == 1 ? 'Admin' : 'Người dùng'; ?>
-                            </td>
-                            <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editUserModal<?php echo $user->id; ?>">
-                                    <i class="bi bi-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#deleteUserModal<?php echo $user->id; ?>">
-                                    <i class="bi bi-trash"></i> Xóa
-                                </button>
-                            </td>
-                        </tr>
+                    <?php if (isset($users) && is_array($users)): ?>
+                        <?php foreach ($users as $user): ?>
+                            <tr>
+                                <td><?php echo $user->id; ?></td>
+                                <td><?php echo $user->name; ?></td>
+                                <td><?php echo $user->email; ?></td>
+                                <td>
+                                    <?php echo $user->acc_type == 1 ? 'Admin' : 'Người dùng'; ?>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editUserModal<?php echo $user->id; ?>">
+                                        <i class="bi bi-pencil"></i> Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal<?php echo $user->id; ?>">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
 
-                        <!-- Modal Edit -->
-                         
-                        <!-- Edit Product Modal -->
-                        <div class="modal fade" id="editProductModal<?= $product->product_id ?>" tabindex="-1"
-                            aria-labelledby="editProductModalLabel<?= $product->product_id ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editProductModalLabel<?= $product->product_id ?>">Chỉnh sửa Sản Phẩm</h5>
-                                        <button type="button" class="btn-close" data-bsdismiss="modal" aria-label="Close"></button>
-                                    </div>
-                        
-                                    <form action="/admin/edit-product/<?= $product->product_id ?>" method="POST" enctype="multipart/form-data">
-                                        <div class="modal-body">
-                        
-                                            <!-- Tên sản phẩm -->
-                                            <div class="mb-3">
-                                                <label for="product_name_<?= $product->product_id ?>" class="form-label">Tên Sản Phẩm</label>
-                                                <input type="text" class="form-control" id="product_name_<?= $product->product_id ?>"
-                                                    name="product_name" value="<?= $product->product_name ?>" required>
-                                            </div>
-                        
-                                            <!-- Giá sản phẩm -->
-                                            <div class="mb-3">
-                                                <label for="price_<?= $product->product_id ?>" class="form-label">Giá</label>
-                                                <input type="number" class="form-control" id="price_<?= $product->product_id ?>" name="price"
-                                                    value="<?= $product->price ?>" required min="1">
-                                            </div>
-                        
-                                            <!-- Ảnh sản phẩm -->
-                                            <div class="mb-3">
-                                                <label for="product_img_<?= $product->product_id ?>" class="form-label">Ảnh Sản Phẩm</label>
-                                                <input type="file" class="form-control" id="product_img_<?= $product->product_id ?>"
-                                                    name="product_img" accept="image/*">
-                                                <img src="/uploads/<?= $product->product_img ?>" alt="Product Image" width="100" class="mt-2">
-                                            </div>
-                        
-                                            <!-- Mô tả sản phẩm -->
-                                            <div class="mb-3">
-                                                <label for="product_description_<?= $product->product_id ?>" class="form-label">Mô tả Sản
-                                                    Phẩm</label>
-                                                <textarea class="form-control" id="product_description_<?= $product->product_id ?>"
-                                                    name="product_description" rows="3"><?= $product->product_description ?></textarea>
-                                            </div>
-                        
-                                            <!-- Danh mục sản phẩm -->
-                                            <div class="mb-3">
-                                                <label for="category_id_<?= $product->product_id ?>" class="form-label">Danh mục Sản
-                                                    Phẩm</label>
-                                                <select class="form-select" id="category_id_<?= $product->product_id ?>" name="category_id"
-                                                    required>
-                                                    <option value="">Chọn danh mục</option>
-                                                    <?php foreach ($categories as $category): ?>
-                                                        <option value="<?= $category->category_id ?>"
-                                                            <?= $category->category_id == $product->category_id ? 'selected' : '' ?>>
-                                                            <?= $category->category_name ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                        
-                                        </div>
-                        
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal Delete -->
-                        <?php require_once ROOTDIR . 'app/views/user/delete.php'; ?>
+                            <!-- Modal Edit -->
+                            <?php include ROOTDIR . 'app/views/user/edit.php'; ?>
+                            <!-- Modal Delete -->
+                            <?php include ROOTDIR . 'app/views/user/delete.php'; ?>
                         <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center">Không có người dùng nào</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
+        <!-- Danh mục sản phẩm Tab -->
         <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
             <h3 class="text-warning">Danh mục Loại sản phẩm</h3>
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Thêm Danh Mục</button>
+            <?php include ROOTDIR . 'app/views/category/add.php' ?>
             <table class="table table-striped table-hover">
                 <thead class="table-light">
                     <tr>
@@ -194,27 +143,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($categories as $category): ?>
-                        <tr>
-                            <td><?php echo $category->category_id; ?></td>
-                            <td><?php echo $category->category_name; ?></td>
-                            <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editCategoryModal<?php echo $category->category_id; ?>">
-                                    <i class="bi bi-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#deleteCategoryModal<?php echo $category->category_id; ?>">
-                                    <i class="bi bi-trash"></i> Xóa
-                                </button>
-                            </td>
-                        </tr>
+                    <?php if (isset($categories) && is_array($categories)): ?>
+                        <?php foreach ($categories as $category): ?>
+                            <tr>
+                                <td><?php echo $category->category_id; ?></td>
+                                <td><?php echo $category->category_name; ?></td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editCategoryModal<?php echo $category->category_id; ?>">
+                                        <i class="bi bi-pencil"></i> Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteCategoryModal<?php echo $category->category_id; ?>">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
 
-                        <!-- Modal Edit -->
-                        <?php require_once ROOTDIR . 'app/views/category/edit.php'; ?>
-                        <!-- Modal Delete -->
-                        <?php require_once ROOTDIR . 'app/views/category/delete.php'; ?>
-                    <?php endforeach; ?>
+                            <!-- Modal Edit -->
+                            <?php include ROOTDIR . 'app/views/category/edit.php'; ?>
+                            <!-- Modal Delete -->
+                            <?php include ROOTDIR . 'app/views/category/delete.php'; ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3" class="text-center">Không có danh mục nào</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

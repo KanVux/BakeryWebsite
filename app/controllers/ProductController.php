@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -13,9 +14,10 @@ class ProductController extends Controller
     public function index()
     {
         $product = new Product(PDO());
+        $products = $product->getProducts(['*'], null);
         $title = 'Products Page';
         $this->renderPage('product/index', [
-            'products' => $product->getProducts(['*'], null),
+            'products' => $products,
             'title' => $title
         ]);
     }
@@ -26,7 +28,7 @@ class ProductController extends Controller
             $data = $this->filterProductData($_POST);
 
             if ($_FILES['product_img']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = 'uploads/';
+                $uploadDir = 'public/uploads/';
                 $uploadFile = $uploadDir . basename($_FILES['product_img']['name']);
                 if (move_uploaded_file($_FILES['product_img']['tmp_name'], $uploadFile)) {
                     $data['product_img'] = basename($_FILES['product_img']['name']);
@@ -47,7 +49,7 @@ class ProductController extends Controller
             redirect('/admin');
         }
 
-        $this->renderPage('admin/addProduct');
+        $this->renderPage('admin/add');
     }
 
     public function filterProductData($data)
@@ -58,19 +60,23 @@ class ProductController extends Controller
             'product_description' => $data['product_description'] ?? '',
             'product_img' => $data['product_img'] ?? '',
             'category_id' => $data['category_id'] ?? 0,
+            'product_id' => $data['product_id'] ?? 0,
         ];
     }
 
     public function editProduct($productId)
     {
-        $product = new Product(PDO());
-        $product = $product->where('product_id', $productId);
+        $productModel = new Product(PDO());
+
+        // Lấy sản phẩm cụ thể cần chỉnh sửa
+        $product = $productModel->where('product_id', $productId);
 
         if (!$product) {
             $_SESSION['error'] = 'Product not found!';
             redirect('/admin');
         }
 
+        // Xử lý khi người dùng gửi form (HTTP POST request)
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'product_name' => $_POST['product_name'] ?? '',
@@ -79,8 +85,9 @@ class ProductController extends Controller
                 'category_id' => $_POST['category_id'] ?? 0,
             ];
 
+            // Kiểm tra và xử lý ảnh sản phẩm nếu có
             if ($_FILES['product_img']['name']) {
-                $uploadDir = 'uploads/';
+                $uploadDir = 'public/uploads/';
                 $uploadFile = $uploadDir . basename($_FILES['product_img']['name']);
                 if (move_uploaded_file($_FILES['product_img']['tmp_name'], $uploadFile)) {
                     $data['product_img'] = basename($_FILES['product_img']['name']);
@@ -90,6 +97,7 @@ class ProductController extends Controller
                 }
             }
 
+            // Cập nhật thông tin sản phẩm
             $product->fill($data);
             $product->save();
 
@@ -97,14 +105,17 @@ class ProductController extends Controller
             redirect('/admin');
         }
 
-        $categories = new Category(PDO());
-        $categories = $categories->getCategories();
+        // Lấy danh sách các danh mục để hiển thị trong form
+        $categoryModel = new Category(PDO());
+        $categories = $categoryModel->getCategories();
 
+        // Truyền dữ liệu cần thiết vào view
         $this->renderPage('admin/edit', [
-            'product' => $product,
-            'categories' => $categories,
+            'product' => $product,      // Truyền sản phẩm cụ thể
+            'categories' => $categories // Truyền danh sách các danh mục
         ]);
     }
+
 
     public function deleteProduct($productId)
     {
@@ -117,7 +128,7 @@ class ProductController extends Controller
         } else {
             $_SESSION['error'] = 'Product not found!';
         }
-
+        
         redirect('/admin');
     }
 }

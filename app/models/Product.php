@@ -5,16 +5,15 @@ use PDO;
 
 class Product extends Model
 {
-    public int $id = -1;
-    public int $product_id;
+    public int $product_id = 0;
     public string $product_name;
     public int $price;
     public int $size;
     public string $flavour;
-    public int $shape = 0; // Initialize with a default value
-    public string $product_description = ''; // Initialize with a default value
-    public string $product_img = ''; // Initialize with a default value
-    public string $category_id; // Initialize with a default value
+    public int $shape = 0;
+    public string $product_description = ''; 
+    public string $product_img = ''; 
+    public string $category_id; 
     public string $created_at;
     public string $updated_at;
 
@@ -56,7 +55,7 @@ class Product extends Model
 
     public function toArray()
     {
-        return [
+        return [    
             'product_id' => $this->product_id,
             'product_name' => $this->product_name,
             'price' => $this->price,
@@ -86,43 +85,51 @@ class Product extends Model
     {
         $result = false;
 
-        if ($this->id >= 0) {
+        if ($this->product_id <= 0) {  // Nếu là sản phẩm mới
+            // Thực hiện INSERT vào cơ sở dữ liệu
             $statement = $this->db->prepare(
-                'UPDATE product SET product_name = :product_name, price = :price, product_description = :product_description, product_img = :product_img, category = :category_id, updated_at = now() WHERE product_id = :product_id'
+                'INSERT INTO product (product_name, price, product_description, product_img, category, created_at, updated_at) 
+            VALUES (:product_name, :price, :product_description, :product_img, :category_id, now(), now())'
             );
             $result = $statement->execute([
                 'product_name' => $this->product_name,
                 'price' => $this->price,
                 'product_description' => $this->product_description,
                 'product_img' => $this->product_img,
-                'category' => $this->category_id,
-                'product_id' => $this->product_id
+                'category_id' => $this->category_id
             ]);
-        } else {
-            $statement = $this->db->prepare(
-                'INSERT INTO product (product_name, price, product_description, product_img, category, created_at, updated_at) VALUES (:product_name, :price, :product_description, :product_img, :category, now(), now())'
-            );
-            $result = $statement->execute([
-                'product_name' => $this->product_name,
-                'price' => $this->price,
-                'product_description' => $this->product_description,
-                'product_img' => $this->product_img,
-                'category' => $this->category_id
-            ]);
+
+            // Nếu thành công, gán ID mới vào đối tượng
             if ($result) {
                 $this->product_id = $this->db->lastInsertId();
             }
+        } else {  // Nếu là sản phẩm đã tồn tại, thực hiện UPDATE
+            // Thực hiện UPDATE trong cơ sở dữ liệu
+            $statement = $this->db->prepare(
+                'UPDATE product SET product_name = :product_name, price = :price, 
+            product_description = :product_description, product_img = :product_img, 
+            category = :category_id, updated_at = now() WHERE product_id = :product_id'
+            );
+            $result = $statement->execute([
+                'product_name' => $this->product_name,
+                'price' => $this->price,
+                'product_description' => $this->product_description,
+                'product_img' => $this->product_img,
+                'category_id' => $this->category_id,
+                'product_id' => $this->product_id  // Thêm tham số product_id để sử dụng trong câu lệnh UPDATE
+            ]);
         }
 
         return $result;
     }
+
 
     public function fill(array $data): self
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
                 if ($value === null && gettype($this->$key) === 'string') {
-                    $this->$key = ''; // Provide a default empty string for null values
+                    $this->$key = ''; 
                 } else {
                     $this->$key = $value;
                 }
@@ -130,4 +137,13 @@ class Product extends Model
         }
         return $this;
     }
+    public function delete(): bool
+    {
+        if ($this->product_id) {
+            $statement = $this->db->prepare("DELETE FROM product WHERE product_id = :product_id");
+            return $statement->execute(['product_id' => $this->product_id]);
+        }
+        return false;
+    }
+
 }
