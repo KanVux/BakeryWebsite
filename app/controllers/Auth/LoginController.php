@@ -23,24 +23,23 @@ class LoginController extends Controller{
     public function store()
     {
         $user_credentials = $this->filterUserCredentials($_POST);
-
         $errors = [];
         $user = (new User(PDO()))->where('email', $user_credentials['email']);
         if (!$user) {
             // Người dùng không tồn tại...
             $errors['email'] = 'Invalid email or password.';
         } else if (AUTHGUARD()->login($user, $user_credentials)) {
-            // Đăng nhập thành công...
-            redirect('/home');
+            if(!AUTHGUARD()->isAdmin())
+                redirect('/home');
+            redirect('/admin');
         } else {
             // Sai mật khẩu...
             $errors['password'] = 'Invalid email or password.';
-            var_dump($user);
         }
 
         // Đăng nhập không thành công: lưu giá trị trong form, trừ password
         $this->saveFormValues($_POST, ['password']);
-        //redirect('/login', ['errors' => $errors]);
+        redirect('/login', ['errors' => $errors]);
     }
 
     public function destroy()

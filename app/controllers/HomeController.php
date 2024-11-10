@@ -12,8 +12,8 @@ class HomeController extends Controller{
     }
     public function index(){  
         $title = 'Home Page';
-        $productController = new ProductController();
-        $products = $productController->getCarouselProducts();
+        $product = new Product(PDO());
+        $products = $product->getProducts();
         $this->renderPage('home/index', [
             'products' => $products ?? [],
             'title' => $title

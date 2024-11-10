@@ -34,10 +34,8 @@ class RegisterController extends Controller
 
         $newUser = new User(PDO());
         $model_errors = $newUser->validate($data);
-
         if (empty($model_errors)) {
             // Hash the password before saving
-            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
             $newUser->fill($data)->save();
 
             $messages = ['success' => 'User has been created successfully.'];
@@ -48,13 +46,13 @@ class RegisterController extends Controller
         }
     }
 
-    protected function filterUserData(array $data)
+    public function filterUserData(array $data)
     {
         return [
             'name' => $data['name'] ?? null,
             'email' => filter_var($data['email'], FILTER_VALIDATE_EMAIL),
-            'password' => $data['password'] ?? '',
-            'password_confirmation' => $data['password_confirmation'] ?? '',
+            'password' => $data['password'] ?? null,
+            'password_confirmation' => $data['password_confirmation'] ?? null,
             'address' => $data['address'] ?? ''
         ];
     }

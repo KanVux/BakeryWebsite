@@ -82,7 +82,7 @@
 
                 <!-- Carousel Inner -->
                 
-                <?php require_once ROOTDIR . 'app\views\product\index.php'; ?>
+                <?php require_once ROOTDIR . 'app\views\product\product_list.php'; ?>
 
                 <!-- Carousel Controls -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
@@ -171,4 +171,7 @@
         </div>
     </div>
 </section>
+<?php $this->stop()?>
+<?php $this->start("page_specific_js") ?>
+    
 <?php $this->stop()?>

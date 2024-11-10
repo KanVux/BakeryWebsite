@@ -8,17 +8,11 @@ class ProductController extends Controller{
         parent::__construct();
     }
     public function index(){
-        $products = new Product(PDO());
-        exit($this->renderPage('product/index', $products->getProducts()));
+        $product = new Product(PDO());
+        $title = 'Products Page';
+        $this->renderPage('product/index', [
+        'products'=>$product->getProducts(['*'], null),
+        'title'=>$title
+    ]);
     }
-
-    public function getCarouselProducts()
-    {
-        $productModel = new Product(PDO());
-        $products = array_map(function ($product) {
-            return $product->toArray();
-        }, $productModel->getProducts());
-        return($products);
-    }
-
 }

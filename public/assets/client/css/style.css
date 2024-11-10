@@ -253,3 +253,123 @@ ul{
     overflow-y: scroll;
 }
 
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #28a745;
+    font-size: 18px;
+    margin-bottom: 10px;
+    
+}
+
+.pagination a.active {
+    font-weight: bolder;
+    color: #28a745;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+.pagination-prev,
+.pagination-next {
+    font-size: 16px;
+}
+
+/* CSS cho banner */
+.banner {
+    display: flex;
+    align-items: center;
+    /* Căn giữa các phần tử theo chiều dọc */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    /* Border-radius nhỏ cho banner */
+    overflow: hidden;
+    /* Đảm bảo các phần tử không vượt ra ngoài viền khi sử dụng border-radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Thêm bóng cho banner */
+}
+
+.banner-image {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    /* Giảm chiều cao của banner */
+    width: 50%;
+}
+
+.banner-text {
+    padding: 20px;
+    color: white;
+    width: 50%;
+}
+
+.banner-title {
+    font-size: 1.8rem;
+    /* Giảm kích thước tiêu đề */
+    font-weight: bold;
+}
+
+.banner-description {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.banner a {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 8px 16px;
+    /* Giảm kích thước nút */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.banner a:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+/* 404 */
+    
+.container.bakery-404-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.btn.bakery-btn-custom {
+    background-color: #f5a623;
+    color: #fff;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.btn.bakery-btn-custom:hover {
+    background-color: #d88e1c;
+}
+
+.bakery-404-image {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+h1.bakery-404-title {
+    font-size: 72px;
+    font-weight: bold;
+    color: #f05d23;
+}
+
+p.bakery-404-message {
+    font-size: 20px;
+    color: #6c757d;
+}

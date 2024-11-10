@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 require 'bootstrap.php';
 
 define('APP_NAME','Kan Bakery');
@@ -18,9 +19,20 @@ $router->get('/login','\App\Controllers\Auth\LoginController@create');
 $router->post('/login', '\App\Controllers\Auth\LoginController@store');
 $router->get('/register', '\App\Controllers\Auth\RegisterController@create');
 $router->post('/register', '\App\Controllers\Auth\RegisterController@store');
-
-
-$router->get('/catagory','\App\Controllers\CategoryController@index');
-
+$router->post('/logout', '\App\Controllers\Auth\LoginController@destroy');
+// Product routes
+$router->get('/product','\App\Controllers\ProductController@index');
+// News routes
+$router->get('/news', '\App\Controllers\NewsController@index');
+// Cart routes
+$router->get('/cart', 'App\Controllers\CartController@view');
+$router->get('/cart/add/(\d+)', 'App\Controllers\CartController@add');
+$router->get('/cart/remove/(\d+)', 'App\Controllers\CartController@remove');
+$router->get('/cart/clear', 'App\Controllers\CartController@clear');
+$router->post('/cart/update/(\d+)', 'App\Controllers\CartController@update');
+// Admin routes
+$router->get('/admin', 'App\Controllers\AdminController@index');
+$router->get('/admin/edit/{id}', 'App\Controllers\AdminController@edit');
+$router->post('/admin/delete/{id}', 'App\Controllers\AdminController@delete');
 
 $router->run();

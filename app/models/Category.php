@@ -5,7 +5,6 @@ namespace App\Models;
 use PDO;
 
 class Category extends Model{
-    private PDO $db;
 
     public string $category_id;
     public string $category_name;
@@ -15,8 +14,8 @@ class Category extends Model{
     public function __construct(PDO $pdo) {
         parent::__construct($pdo);
     }
-    public function getCategory($columns = ['*'], $limit = 12): array{
-        $categories = parent::getItems(Category::class, 'category',['*'],12);
+    public function getCategories($columns = ['*'], $limit = 12): array{
+        $categories = parent::getItems(Category::class, 'category',['*'], null);
         return $categories;
     }
     public function fillFromDbRow(array $row){

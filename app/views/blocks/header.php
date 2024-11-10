@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/assets/client/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,14 +20,14 @@
             <div class="container-fluid search-box-container ">
                 <div class="d-flex justify-content-end container py-2 gap-2">
                     <div>
-                        <a href="products.php" class="link-dark text-decoration-none">
+                        <a href="/product" class="link-dark text-decoration-none">
                             <div class="icon-container align-content-center rounded-circle text-center border border-secondary">
                                 <i class="fa fa-solid fa-magnifying-glass"></i>
                             </div>
                         </a> 
                     </div>
                     <div>
-                        <a href="#" class="link-dark text-decoration-none">
+                        <a href="/cart" class="link-dark text-decoration-none">
                             <div class="icon-container align-content-center rounded-circle text-center border border-secondary">
                                 <i class="fa fa-solid fa-cart-shopping"></i>
                             </div>
@@ -46,12 +47,12 @@
                         <?php else :?>
                             <li>
                                 <a class="dropdown-item">
-                                    <?= $this->e(AUTHGUARD()->user()->name) ?>
+                                    <?= $this->e(AUTHGUARD()->user()->name);?>
                                     <span class="caret"></span>
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>  
-                            <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form).submit(); ">Đăng xuất</a></li>
+                            <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit(); ">Đăng xuất</a></li>
                             <form id="logout-form" class="d-none" action="/logout" method="POST"></form>
                         <?php endif ?>
                     </ul>
@@ -75,22 +76,9 @@
                             <a class="nav-link fs-5" aria-current="page" href="/home">Trang chủ</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle fs-5" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link fs-5" href="/product">
                                 Sản phẩm
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhKem">Bánh kem</a></li>
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhNgot">Bánh ngọt</a></li>
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhLanh">Bánh lạnh</a></li>
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhMi">Bánh mì</a></li>
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhMan">Bánh mặn</a></li>
-                                <li class="dropdown-item"><a class="nav-link fs-5" href="/products/BanhNuong">Bánh nướng</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item fs-5" href="/products">Sản phẩm khác</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="/gallery">Gallery</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fs-5" href="/news">Tin tức và Ưu đãi</a>

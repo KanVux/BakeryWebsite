@@ -4,18 +4,23 @@ namespace App\Models;
 
 use PDO;
 
-class User extends Model{
-    private PDO $db;
+class User extends Model {
+    protected PDO $db;
     public int $id = -1;
-    public string $name;
-    public string $password;
-    public string $email;
-    public string $address;
+    public string $name = '';  // Khởi tạo mặc định
+    public string $password = '';  // Khởi tạo mặc định
+    public string $email = '';  // Khởi tạo mặc định
+    public string $address = '';  // Khởi tạo mặc định
+    public int $acc_type = 0;  // Khởi tạo mặc định
 
-    public function __construct(PDO $pdo){
+    public function __construct(PDO $pdo) {
         $this->db = $pdo;
     }
-    public function where(string $column, string $value): User
+
+    public function getUsers(){
+        return $this->getItems($this::class,'users',['*'], null);
+    }
+    public function where(string $column, $value): User
     {
         $statement = $this->db->prepare("select * from users where $column = :value");
         $statement->execute(['value' => $value]);
@@ -25,14 +30,16 @@ class User extends Model{
         }
         return $this;
     }
-    private function fillFromDbRow(array $row)
+    public function fillFromDbRow(array $row)
     {
         $this->id = $row['id'];
         $this->email = $row['email'];
         $this->name = $row['name'];
         $this->password = $row['password'];
         $this->address = $row['address'];
+        $this->acc_type = $row['acc_type'];
     }
+
 
     public function save(): bool
     {
