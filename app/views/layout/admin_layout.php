@@ -6,8 +6,6 @@
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <?= $this->section("page_specific_css") ?>
-
-    <link rel="stylesheet" href="/path/to/your/css/styles.css">
 </head>
 <body>
 

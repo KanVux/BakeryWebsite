@@ -120,7 +120,14 @@
                                         <p class="card-text"><?= $this->e($product->product_description) ?></p>
                                         <div class="d-flex flex-column"> 
                                             <h3 class="text-success"><?= $this->e($product->price) ?> VND</h3>
-                                            <button class="btn btn-warning border border-secondary shadow-sm">Buy Now</button>
+                                            <form id="add-to-cart-form-<?= $product->product_id ?>" class="add-to-cart-form"
+                                                data-product-id="<?= $product->product_id ?>">
+                                            </form>
+                                            <button type="submit" class="btn btn-warning border border-secondary shadow-sm">
+                                                <a href="/cart/add/<?= $product->product_id ?>?quantity=1" class="nav-link">
+                                                    Thêm vào giỏ
+                                                </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -184,6 +191,7 @@
         </div>
     </div>
 </section>
+
 <?php $this->stop()?>
 <?php $this->start("page_specific_js")?>
 <script>

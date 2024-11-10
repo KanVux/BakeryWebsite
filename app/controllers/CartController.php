@@ -23,7 +23,7 @@ class CartController extends Controller
             }
         } else {
             // Nếu chưa đăng nhập, khởi tạo session cho giỏ hàng
-            $_SESSION['user_id'] = ['cart' => []];
+            $_SESSION['cart'] = [];
         }
     }
 

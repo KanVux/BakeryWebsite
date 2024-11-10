@@ -17,6 +17,7 @@ class User extends Model {
         $this->db = $pdo;
     }
 
+
     public function getUsers(){
         return $this->getItems($this::class,'users',['*'], null);
     }
@@ -105,5 +106,47 @@ class User extends Model {
             $errors['password'] = 'Password confirmation does not match.';
         }
         return $errors;
+    }
+    public function add(array $data): bool
+    {
+        $this->fill($data); // Điền dữ liệu vào đối tượng
+        $this->password = password_hash($data['password'], PASSWORD_BCRYPT); // Mã hóa mật khẩu
+        return $this->save(); // Lưu vào cơ sở dữ liệu
+    }
+
+    // Cập nhật người dùng
+    public function edit(array $data): bool
+    {
+        if ($this->id) {
+            $this->fill($data); // Điền lại dữ liệu vào đối tượng
+            if (isset($data['password'])) {
+                $this->password = password_hash($data['password'], PASSWORD_BCRYPT); // Mã hóa mật khẩu nếu có
+            }
+            return $this->save(); // Lưu vào cơ sở dữ liệu
+        }
+        return false;
+    }
+
+    // Xóa người dùng
+    public function delete(): bool
+    {
+        if ($this->id) {
+            $statement = $this->db->prepare("DELETE FROM users WHERE id = :id");
+            return $statement->execute(['id' => $this->id]);
+        }
+        return false;
+    }
+
+    // Tìm người dùng theo ID
+    public function findById(int $id): ?User
+    {
+        $statement = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $statement->execute(['id' => $id]);
+        $row = $statement->fetch();
+        if ($row) {
+            $this->fillFromDbRow($row);
+            return $this;
+        }
+        return null;
     }
 }
