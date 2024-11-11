@@ -23,9 +23,15 @@
                                         <h3 class="text-success"><?= number_format($product->price) ?> VND</h3>
                                         <form id="add-to-cart-form-<?= $product->product_id ?>" class="add-to-cart-form" data-product-id="<?= $product->product_id ?>">
                                         <button type="submit" class="btn btn-warning border border-secondary shadow-sm">
+                                            <?php if(AUTHGUARD()->isUserLoggedIn()): ?>
                                             <a href="/cart/add/<?= $product->product_id ?>?quantity=1" class="nav-link">
                                                 Thêm vào giỏ
                                             </a>
+                                            <?php else: ?>
+                                            <a href="/login" class="nav-link">
+                                                Thêm vào giỏ
+                                            </a>                                                
+                                            <?php endif ?>
                                         </button>
                                         </form>
                                     </div>

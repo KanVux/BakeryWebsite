@@ -24,16 +24,20 @@ class User extends Model
         return $this->getItems(self::class, 'users', $select, $limit);
     }
 
-    public function where(string $column, string $value): User
+    public function where(string $column, string $value): ?User
     {
         $statement = $this->db->prepare("SELECT * FROM users WHERE $column = :value");
         $statement->execute(['value' => $value]);
         $row = $statement->fetch();
+
         if ($row) {
             $this->fillFromDbRow($row);
+            return $this; // Trả về đối tượng User nếu tìm thấy
         }
-        return $this;
+
+        return null; // Trả về null nếu không tìm thấy người dùng
     }
+
 
     public function fillFromDbRow(array $row)
     {
@@ -70,7 +74,7 @@ class User extends Model
         } else {
             $statement = $this->db->prepare(
                 'UPDATE users SET name = :name, email = :email, password = :password, 
-                acc_type = :acc_type, address = :address updated_at = now() WHERE id = :id'
+                acc_type = :acc_type, address = :address, updated_at = now() WHERE id = :id'
             );
             $result = $statement->execute([
                 'name' => $this->name,
@@ -94,17 +98,40 @@ class User extends Model
         return false;
     }
 
-    public function fill(array $data): self
+
+    public function find($id)
     {
-        foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                if ($value === null && gettype($this->$key) === 'string') {
-                    $this->$key = '';
-                } else {
-                    $this->$key = $value;
-                }
-            }
+        $statement = $this->db->prepare('SELECT * FROM users WHERE id = :id');
+        $statement->execute(['id' => $id]);
+        $row = $statement->fetch();
+        if ($row) {
+            $this->fillFromDbRow($row);
         }
         return $this;
+    }
+    private function isEmailInUse(string $email): bool
+    {
+        $statement = $this->db->prepare('select count(*) from users where email = :email');
+        $statement->execute(['email' => $email]);
+        return $statement->fetchColumn() > 0;
+    }
+
+    public function validate(array $data): array
+    {
+        $errors = [];
+
+        if (!$data['email']) {
+            $errors['email'] = 'Invalid email.';
+        } elseif ($this->isEmailInUse($data['email'])) {
+            $errors['email'] = 'Email already in use.';
+        }
+
+        if (strlen($data['password']) < 6) {
+            $errors['password'] = 'Password must be at least 6 characters.';
+        } elseif ($data['password'] != $data['password_confirmation']) {
+            $errors['password'] = 'Password confirmation does not match.';
+        }
+
+        return $errors;
     }
 }

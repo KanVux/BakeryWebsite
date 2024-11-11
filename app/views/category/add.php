@@ -9,6 +9,10 @@
             <form action="/admin/add-category" method="POST">
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="category_id" class="form-label">Ký hiệu Danh Mục</label>
+                        <input type="text" class="form-control" id="category_id" name="category_id" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="category_name" class="form-label">Tên Danh Mục</label>
                         <input type="text" class="form-control" id="category_name" name="category_name" required>
                     </div>

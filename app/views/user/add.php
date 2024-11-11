@@ -28,6 +28,13 @@
                         <input type="password" class="form-control" id="password" name="password" required placeholder="Nhập mật khẩu">
                     </div>
 
+                    <!-- Địa chỉ -->
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Mật khẩu</label>
+                        <textarea class="form-control" id="address" name="address" rows="3"
+                            placeholder="Nhập địa chỉ..."></textarea>
+                    </div>
+
                     <!-- Quyền -->
                     <div class="mb-3">
                         <label for="acc_type" class="form-label">Quyền</label>

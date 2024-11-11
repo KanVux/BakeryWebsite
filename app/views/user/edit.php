@@ -22,9 +22,15 @@
                         <input type="email" class="form-control" id="email_<?= $user->id ?>" name="email" value="<?= $user->email ?>" required>
                     </div>
 
-                    <!-- Mật khẩu -->
+                    <!-- Mật khẩu cũ -->
                     <div class="mb-3">
-                        <label for="password_<?= $user->id ?>" class="form-label">Mật khẩu</label>
+                        <label for="old_password_<?= $user->id ?>" class="form-label">Mật khẩu cũ</label>
+                        <input type="password" class="form-control" id="old_password_<?= $user->id ?>" name="old_password" placeholder="Nhập mật khẩu cũ" required>
+                    </div>
+
+                    <!-- Mật khẩu mới -->
+                    <div class="mb-3">
+                        <label for="password_<?= $user->id ?>" class="form-label">Mật khẩu mới</label>
                         <input type="password" class="form-control" id="password_<?= $user->id ?>" name="password" placeholder="Nhập mật khẩu mới nếu muốn thay đổi">
                     </div>
 

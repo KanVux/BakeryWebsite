@@ -24,7 +24,8 @@ class UserController extends Controller
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+                'password' => $_POST['password'],
+                'address' => $_POST['address'],
                 'acc_type' => $_POST['acc_type'] ?? 0,
             ];
 
@@ -40,7 +41,7 @@ class UserController extends Controller
     public function editUser($userId)
     {
         $user = new User(PDO());
-        $user = $user->where('id', $userId);
+        $user = $user->find($userId);
 
         if (!$user) {
             $_SESSION['error'] = 'User not found!';
@@ -51,9 +52,19 @@ class UserController extends Controller
             $data = [
                 'name' => $_POST['name'] ?? '',
                 'email' => $_POST['email'] ?? '',
-                'password' => $_POST['password'] ? password_hash($_POST['password'], PASSWORD_BCRYPT) : $user->password,
-                'acc_type' => $_POST['acc_type'] ?? 0,
+                'acc_type' => $_POST['acc_type'] ?? 0
             ];
+
+            if (!empty($_POST['old_password'])) {
+                if (!password_verify($_POST['old_password'], $user->password)) {
+                    $_SESSION['error'] = 'Mật khẩu cũ không đúng!';
+                    redirect("/admin");
+                }
+            }
+
+            if (!empty($_POST['password'])) {
+                $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            }
 
             $user->fill($data);
             $user->save();
@@ -62,10 +73,9 @@ class UserController extends Controller
             redirect('/admin');
         }
 
-        $this->renderPage('admin/edit', [
-            'user' => $user,
-        ]);
+        $this->renderPage('admin/index', ['user' => $user]);
     }
+
 
     public function deleteUser($userId)
     {

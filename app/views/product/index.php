@@ -124,9 +124,15 @@
                                                 data-product-id="<?= $product->product_id ?>">
                                             </form>
                                             <button type="submit" class="btn btn-warning border border-secondary shadow-sm">
-                                                <a href="/cart/add/<?= $product->product_id ?>?quantity=1" class="nav-link">
-                                                    Thêm vào giỏ
-                                                </a>
+                                                <?php if (AUTHGUARD()->isUserLoggedIn()): ?>
+                                                    <a href="/cart/add/<?= $product->product_id ?>?quantity=1" class="nav-link">
+                                                        Thêm vào giỏ
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="/login" class="nav-link">
+                                                        Thêm vào giỏ
+                                                    </a>
+                                                <?php endif ?>
                                             </button>
                                         </div>
                                     </div>

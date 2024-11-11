@@ -46,10 +46,16 @@
                             <li><a class="dropdown-item" href="/register">Đăng ký</a></li>
                         <?php else :?>
                             <li>
-                                <a class="dropdown-item">
+                                <a class="dropdown-item disabled text-primary">
                                     <?= $this->e(AUTHGUARD()->user()->name);?>
                                     <span class="caret"></span>
                                 </a>
+                                <?php if (AUTHGUARD()->isAdmin()): ?>
+                                <hr>
+                                <a class="dropdown-item" href="/admin">
+                                    Quản lý dữ liệu
+                                </a>  
+                                <?php endif ?>                               
                             </li>
                             <li><hr class="dropdown-divider"></li>  
                             <li><a class="dropdown-item" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit(); ">Đăng xuất</a></li>

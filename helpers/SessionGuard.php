@@ -12,7 +12,7 @@ class SessionGuard
   }
   public function login(User $user, array $credentials)
   {
-    
+
     $verified = password_verify($credentials['password'], $user->password);
     if ($verified) {
       $_SESSION['user_id'] = $user->id;

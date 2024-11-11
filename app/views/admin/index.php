@@ -6,21 +6,34 @@
     <h1 class="text-center text-primary mb-4 font-title">Quản lý Dữ liệu - Tiệm Bánh Ngọt</h1>
 
     <!-- Tab Nav -->
-    <ul class="nav nav-tabs" id="adminTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#products" role="tab"
-                aria-controls="products" aria-selected="true">Sản phẩm</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="users-tab" data-bs-toggle="tab" href="#users" role="tab" aria-controls="users"
-                aria-selected="false">Người dùng</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="categories-tab" data-bs-toggle="tab" href="#categories" role="tab"
-                aria-controls="categories" aria-selected="false">Danh mục sản phẩm</a>
-        </li>
-    </ul>
-
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="product-tab" data-bs-toggle="tab" href="#products" role="tab"
+                    aria-controls="products" aria-selected="true">Sản phẩm</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="users-tab" data-bs-toggle="tab" href="#users" role="tab" aria-controls="users"
+                    aria-selected="false">Người dùng</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="categories-tab" data-bs-toggle="tab" href="#categories" role="tab"
+                    aria-controls="categories" aria-selected="false">Danh mục sản phẩm</a>
+            </li>
+        </ul>
+        
+        <!-- Home Button -->
+        <a href="/" class="btn btn-outline-primary d-flex align-items-center">
+            <i class="fas fa-home me-2"></i> Home
+        </a>
+    </div>
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?php echo $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
     <!-- Tab Content -->
     <div class="tab-content mt-4" id="adminTabsContent">
 
@@ -176,11 +189,6 @@
 
     </div>
 </div>
-<?php if (isset($_SESSION['error'])): ?>
-    <div class="alert alert-danger">
-        <?php echo $_SESSION['error']; ?>
-    </div>
-    <?php unset($_SESSION['error']); ?>
-<?php endif; ?>
+
 
 <?php $this->stop() ?>
