@@ -49,7 +49,7 @@ class ProductController extends Controller
             redirect('/admin');
         }
 
-        $this->renderPage('admin/');
+        $this->renderPage('/admin/index');
     }
 
     public function filterProductData($data)
@@ -70,12 +70,10 @@ class ProductController extends Controller
 
         // Lấy sản phẩm cụ thể cần chỉnh sửa
         $product = $productModel->where('product_id', $productId);
-        var_dump($_SESSION['error']);
 
         if (!$product) {
             $_SESSION['error'] = 'Product not found!';
-            var_dump($_SESSION['error']);
-            //redirect('/admin');
+            redirect('/admin');
         }
 
         // Xử lý khi người dùng gửi form (HTTP POST request)
@@ -95,7 +93,7 @@ class ProductController extends Controller
                     $data['product_img'] = basename($_FILES['product_img']['name']);
                 } else {
                     $_SESSION['error'] = 'Error moving uploaded file!';
-                    //redirect('/admin');
+                    redirect('/admin');
                 }
             }
 
@@ -104,7 +102,7 @@ class ProductController extends Controller
             $product->save();
 
             $_SESSION['success'] = 'Product updated successfully!';
-           // redirect('/admin');
+            redirect('/admin');
         }
 
         // Lấy danh sách các danh mục để hiển thị trong form
@@ -112,7 +110,7 @@ class ProductController extends Controller
         $categories = $categoryModel->getCategories();
 
         // Truyền dữ liệu cần thiết vào view
-        $this->renderPage('admin/', [
+        $this->renderPage('/admin/index', [
             'product' => $product,      // Truyền sản phẩm cụ thể
             'categories' => $categories // Truyền danh sách các danh mục
         ]);

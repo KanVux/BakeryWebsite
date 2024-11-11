@@ -73,15 +73,12 @@ class CategoryController extends Controller
             // Cập nhật danh mục vào cơ sở dữ liệu
             if ($category->save()) {
                 $_SESSION['success'] = 'Category updated successfully!';
-                //redirect('/admin');
+                redirect('/admin');
             } else {
                 $_SESSION['error'] = 'Failed to update category.';
-                //redirect('/admin');
+                redirect('/admin');
             }
         }
-
-        // Render trang chỉnh sửa với dữ liệu của danh mục
-        //$this->renderPage('admin/editCategory', ['category' => $category]);
     }
 
 
