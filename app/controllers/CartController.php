@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Product;
 use App\Controllers\Controller;
 
+use App\Models\User;
 class CartController extends Controller
 {
     public function __construct()
@@ -69,7 +70,7 @@ class CartController extends Controller
         $this->renderPage('cart/index', [
             'cart' => $_SESSION['cart'],
             'total' => $total,
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
@@ -127,4 +128,25 @@ class CartController extends Controller
             exit;
         }
     }
+
+    public function processPayment()
+    {
+        $paymentMethod = $_POST['payment_method'];
+        $name = AUTHGUARD()->user()->name;
+        $address = AUTHGUARD()->user()->address;
+        $phone = $_POST['phone'];
+        $total = $this->calculateTotal();
+
+        // Truyền dữ liệu vào view
+        $this->renderPage('cart/order-confirm', [
+            'paymentMethod' => $paymentMethod,
+            'name' => $name,
+            'address' => $address,
+            'phone' => $phone,
+            'total' => $total
+        ]);
+        exit;
+    }
+
+
 }

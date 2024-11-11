@@ -41,7 +41,10 @@
                 </div>
             <?php endforeach; ?>
 <?php
-    echo '</div></div>';
+     if ($counter % 4 != 1) {
+        echo '</div>'; // Đóng div của carousel-item nếu nhóm sản phẩm cuối không đủ 4 phần tử
+    }
+    echo '</div>'; // Đóng carousel-inner        
 ?>
 
 </div>

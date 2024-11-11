@@ -52,6 +52,7 @@ $router->get('/admin', 'App\Controllers\UserController@index');
 $router->post('/admin/add-user', 'App\Controllers\UserController@addUser');
 $router->post('/admin/edit-user/{id}', 'App\Controllers\UserController@editUser');
 $router->post('/admin/delete-user/{id}', 'App\Controllers\UserController@deleteUser');
-
+// Payment routes
+$router->post('/order-confirmation', 'App\Controllers\CartController@processPayment');
 // Run the Router
 $router->run();
