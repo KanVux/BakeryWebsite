@@ -58,68 +58,72 @@
             </div>
             <div class="modal-body">
                 <form id="payment-form" action="/order-confirmation" method="POST">
-                <!-- Hiển thị thông tin người dùng (tên và địa chỉ) -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">Họ và tên</label>
-                    <input type="text" id="name" name="name" class="form-control" value='<?= AUTHGUARD()->user()->name ?>' readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa chỉ giao hàng</label>
-                    <input type="text" id="address" name="address" class="form-control" value='<?= AUTHGUARD()->user()->address ?>' readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Số điện thoại</label>
-                    <input type="text" id="phone" name="phone" class="form-control" required>
-                </div>
-
-                <!-- Phương thức thanh toán -->
-                <h5>Chọn Phương Thức Thanh Toán</h5>
-                <div class="mb-3">
-                    <label>
-                        <input type="radio" name="payment_method" value="credit_card" required>
-                        Thẻ tín dụng/Thẻ ghi nợ (Visa/Mastercard)
-                    </label>
-                </div>
-                <div class="mb-3">
-                    <label>
-                        <input type="radio" name="payment_method" value="bank_transfer">
-                        Chuyển khoản ngân hàng
-                    </label>
-                </div>
-                <div class="mb-3">
-                    <label>
-                        <input type="radio" name="payment_method" value="cod">
-                        Thanh toán khi nhận hàng (COD)
-                    </label>
-                </div>
-
-                <!-- Thông tin thẻ tín dụng (hiện ra khi chọn phương thức thanh toán qua thẻ) -->
-                <div id="credit-card-info" style="display:none;">
+                    <!-- Hiển thị thông tin người dùng (tên và địa chỉ) -->
                     <div class="mb-3">
-                        <label for="card_number" class="form-label">Số thẻ</label>
-                        <input type="text" id="card_number" name="card_number" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                        <label for="name" class="form-label">Họ và tên</label>
+                        <input type="text" id="name" name="name" class="form-control"
+                            value='<?= AUTHGUARD()->user()->name ?>' readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="expiry_date" class="form-label">Ngày hết hạn</label>
-                        <input type="text" id="expiry_date" name="expiry_date" class="form-control" placeholder="MM/YY" required>
+                        <label for="address" class="form-label">Địa chỉ giao hàng</label>
+                        <input type="text" id="address" name="address" class="form-control"
+                            value='<?= AUTHGUARD()->user()->address ?>' readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="cvv" class="form-label">CVV</label>
-                        <input type="text" id="cvv" name="cvv" class="form-control" required>
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="text" id="phone" name="phone" class="form-control" required>
                     </div>
-                </div>
 
-                <!-- Thông tin ngân hàng (hiện ra khi chọn phương thức thanh toán qua chuyển khoản ngân hàng) -->
-                <div id="bank-info" style="display:none;">
-                    <h5>Thông tin chuyển khoản ngân hàng:</h5>
-                    <p><strong>Ngân hàng: </strong>Vietcombank</p>
-                    <p><strong>Số tài khoản: </strong>1234567890</p>
-                    <p><strong>Chủ tài khoản: </strong>Cửa hàng Bánh Ngọt</p>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success w-100">Xác Nhận Thanh Toán</button>
-                </div>
-            </form>
+                    <!-- Phương thức thanh toán -->
+                    <h5>Chọn Phương Thức Thanh Toán</h5>
+                    <div class="mb-3">
+                        <label>
+                            <input type="radio" name="payment_method" value="credit_card" required>
+                            Thẻ tín dụng/Thẻ ghi nợ (Visa/Mastercard)
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label>
+                            <input type="radio" name="payment_method" value="bank_transfer">
+                            Chuyển khoản ngân hàng
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label>
+                            <input type="radio" name="payment_method" value="cod">
+                            Thanh toán khi nhận hàng (COD)
+                        </label>
+                    </div>
+
+                    <!-- Thông tin thẻ tín dụng (hiện ra khi chọn phương thức thanh toán qua thẻ) -->
+                    <div id="credit-card-info" style="display:none;">
+                        <div class="mb-3">
+                            <label for="card_number" class="form-label">Số thẻ</label>
+                            <input type="text" id="card_number" name="card_number" class="form-control"
+                                placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="expiry_date" class="form-label">Ngày hết hạn</label>
+                            <input type="text" id="expiry_date" name="expiry_date" class="form-control"
+                                placeholder="MM/YY" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input type="text" id="cvv" name="cvv" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin ngân hàng (hiện ra khi chọn phương thức thanh toán qua chuyển khoản ngân hàng) -->
+                    <div id="bank-info" style="display:none;">
+                        <h5>Thông tin chuyển khoản ngân hàng:</h5>
+                        <p><strong>Ngân hàng: </strong>Vietcombank</p>
+                        <p><strong>Số tài khoản: </strong>1234567890</p>
+                        <p><strong>Chủ tài khoản: </strong>Cửa hàng Bánh Ngọt</p>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success w-100">Xác Nhận Thanh Toán</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -128,6 +132,52 @@
 
 <?php $this->start("page_specific_js") ?>
 <script>
+    $(document).ready(function () {
+        // Hàm gửi AJAX
+        function updateQuantity(productId, newQuantity) {
+            $.ajax({
+                url: '/cart/update/' + productId,
+                method: 'POST',
+                data: { quantity: newQuantity },
+                success: function (response) {
+                    try {
+                        var result = JSON.parse(response);
+                        // Cập nhật lại số lượng và tổng giá trị sau khi thành công
+                        if (result.success) {
+                            var totalPrice = result.totalPrice;
+                            var totalAmount = result.totalAmount;
+                            // Cập nhật giá trị trên giao diện
+                            $("#product-" + productId + " .quantity-input").val(newQuantity);
+                            $("#product-" + productId + " .total-price").text(totalPrice + ' VND');
+                            $("#total-amount").text("Tổng cộng: " + totalAmount + " VND");
+                            // Cập nhật nút giảm
+                            $("#product-" + productId + " .decrease").prop('disabled', newQuantity <= 1);
+                        }
+                    } catch (e) {
+                        console.error("Có lỗi trong phản hồi từ server:", e);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Có lỗi xảy ra khi gửi AJAX:", status, error);
+                }
+            });
+        }
+        $(".increase").on("click", function () {
+            var productId = $(this).data("product-id");
+            var currentQuantity = $("#product-" + productId + " .quantity-input").val();
+            var newQuantity = parseInt(currentQuantity) + 1;
+            updateQuantity(productId, newQuantity);
+        });
+        $(".decrease").on("click", function () {
+            var productId = $(this).data("product-id");
+            var currentQuantity = $("#product-" + productId + " .quantity-input").val();
+            var newQuantity = parseInt(currentQuantity) - 1;
+            updateQuantity(productId, newQuantity);
+        });
+    });
+
+    // Các sự kiện tăng và giảm số lượng không thay đổi
+
     $(document).ready(function () {
         // Hiển thị hoặc ẩn các thông tin liên quan đến phương thức thanh toán
         $("input[name='payment_method']").on("change", function () {
@@ -161,4 +211,3 @@
     });
 </script>
 <?php $this->stop() ?>
-
