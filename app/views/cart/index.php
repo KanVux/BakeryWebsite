@@ -25,7 +25,7 @@
                     </td>
                     <td><?php echo number_format($item['product']['price']); ?> VND</td>
                     <td>
-                        <button class="btn btn-secondary btn-sm decrease" data-product-id="<?= $productId ?>" <?php echo $item['quantity'] <= 1 ? 'disabled' : ''; ?>>-</button>
+                        <button class="btn btn-secondary btn-sm decrease" data-product-id="<?= $productId ?>" <?php echo $item['quantity'] <= 1 ? 'disabled' : ''; ?> id=>-</button>
                         <input type="number" value="<?= $item['quantity'] ?>" class="form-control d-inline quantity-input"
                             style="width: 60px; display: inline-block; text-align: center;" min="1"
                             data-product-id="<?= $productId ?>" readonly>
@@ -133,6 +133,27 @@
 <?php $this->start("page_specific_js") ?>
 <script>
     $(document).ready(function () {
+        
+        $('#add-to-cart-button').click(function() {
+            var productId = $(this).data('product-id'); // Get the product ID from button data attribute
+            var quantity = 1; // You can adjust this based on user input
+
+            $.ajax({
+                url: '/add-to-cart', // Adjust this URL to your actual route
+                method: 'POST',
+                data: {
+                    product_id: productId,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    alert('Product added to cart!');
+                },
+                error: function() {
+                    alert('Failed to add product to cart.');
+                }
+            });
+        });
+
         // Hàm gửi AJAX
         function updateQuantity(productId, newQuantity) {
             $.ajax({
